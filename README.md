@@ -2,6 +2,8 @@
 
 Abachrome is a Ruby gem for parsing, manipulating, and managing colors. It provides a robust set of tools for working with various color formats including hex, RGB, HSL, and named colors.
 
+![Abachrome Logo](logo.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -97,3 +99,11 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/durabl
 
 We'd like to thank the excellent Color.js and culori color libraries, which helped inspire this project and
 inform its design.
+
+# Commercial Support
+
+Commercial support for this tool is available from Durable Programming, LLC. You can find out more at [durableprogramming.com](https://durableprogramming.com/) or via email at [commercial@durableprogramming.com](mailto:commercial@durableprogramming.com).
+
+# Copyright
+
+Copyright 2025, Durable Programming LLC. All rights reserved.
