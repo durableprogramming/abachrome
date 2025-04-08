@@ -3,6 +3,20 @@
 module Abachrome
   module Converters
     class OklabToLrgb < Abachrome::Converters::Base
+      # Converts a color from OKLAB color space to linear RGB color space.
+      # 
+      # The method implements the OKLAB to linear RGB transformation matrix based on
+      # standard color science algorithms. It first confirms the input is in OKLAB
+      # space, then applies the transformation through several steps:
+      # 1. Converts OKLAB coordinates to intermediate L'M'S' values
+      # 2. Applies a cubic operation to get LMS values
+      # 3. Transforms LMS to linear RGB
+      # 4. Clamps negative values to zero
+      # 
+      # @param oklab_color [Abachrome::Color] The color in OKLAB color space
+      # @raise [ArgumentError] If the input color is not in OKLAB color space
+      # @return [Abachrome::Color] The resulting color in linear RGB color space with
+      # the same alpha as the input color
       def self.convert(oklab_color)
         raise_unless oklab_color, :oklab
 

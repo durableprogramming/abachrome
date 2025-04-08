@@ -3,6 +3,12 @@
 module Abachrome
   module ColorModels
     class Oklch
+      # Normalizes OKLCH color values to their standard ranges.
+      # 
+      # @param l [Numeric] The lightness component, will be clamped to range 0-1
+      # @param c [Numeric] The chroma component, will be clamped to range 0-1
+      # @param h [Numeric] The hue component in degrees, will be normalized to range 0-360
+      # @return [Array<AbcDecimal>] Array containing the normalized [lightness, chroma, hue] values
       def self.normalize(l, c, h)
         l = AbcDecimal(l)
         c = AbcDecimal(c)
@@ -19,6 +25,12 @@ module Abachrome
         [l, c, h]
       end
 
+      # Converts OKLCH color coordinates to OKLab color coordinates.
+      # 
+      # @param l [Numeric] The lightness value in the OKLCH color space
+      # @param c [Numeric] The chroma value in the OKLCH color space
+      # @param h [Numeric] The hue value in degrees in the OKLCH color space
+      # @return [Array<Numeric>] An array containing the OKLab coordinates [l, a, b]
       def self.to_oklab(l, c, h)
         # Convert OKLCH to OKLab
         h_rad = h * Math::PI / 180
@@ -27,6 +39,15 @@ module Abachrome
         [l, a, b]
       end
 
+      # Converts OKLab color coordinates to OKLCH color coordinates.
+      # 
+      # @param l [Numeric] The lightness component from OKLab.
+      # @param a [Numeric] The green-red component from OKLab.
+      # @param b [Numeric] The blue-yellow component from OKLab.
+      # @return [Array<Numeric>] An array containing the OKLCH values [l, c, h] where:
+      # - l is the lightness component (unchanged from OKLab)
+      # - c is the chroma component (calculated from a and b)
+      # - h is the hue angle in degrees (0-360)
       def self.from_oklab(l, a, b)
         # Convert OKLab to OKLCH
         c = Math.sqrt((a * a) + (b * b))

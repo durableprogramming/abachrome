@@ -3,6 +3,11 @@
 module Abachrome
   module Converters
     class OklchToOklab < Abachrome::Converters::Base
+      # Converts a color from OKLCH color space to OKLAB color space.
+      # 
+      # @param oklch_color [Abachrome::Color] The color in OKLCH format to convert
+      # @return [Abachrome::Color] The converted color in OKLAB format
+      # @raise [StandardError] If the provided color is not in OKLCH color space
       def self.convert(oklch_color)
         raise_unless oklch_color, :oklch
 
