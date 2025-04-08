@@ -57,27 +57,69 @@ module Abachrome
     autoload :Hex, "abachrome/parsers/hex"
   end
 
+  # Creates a new color in the specified color space with given coordinates and alpha value.
+  # 
+  # @param space_name [Symbol, String] The name of the color space (e.g., :srgb, :oklch)
+  # @param coordinates [Array<Numeric>] The color coordinates in the specified color space
+  # @param alpha [Float] The alpha (opacity) value of the color, defaults to 1.0 (fully opaque)
+  # @return [Abachrome::Color] A new Color object in the specified color space with the given coordinates
   def create_color(space_name, *coordinates, alpha: 1.0)
     space = ColorSpace.find(space_name)
     Color.new(space, coordinates, alpha)
   end
 
+  # Creates a color object from RGB values.
+  # 
+  # @param r [Numeric] The red component value (typically 0-255 or 0.0-1.0)
+  # @param g [Numeric] The green component value (typically 0-255 or 0.0-1.0)
+  # @param b [Numeric] The blue component value (typically 0-255 or 0.0-1.0)
+  # @param alpha [Float] The alpha (opacity) component value (0.0-1.0), defaults to 1.0 (fully opaque)
+  # @return [Abachrome::Color] A new Color object initialized with the specified RGB values
   def from_rgb(r, g, b, alpha = 1.0)
     Color.from_rgb(r, g, b, alpha)
   end
 
+  # Creates a color in the OKLAB color space.
+  # 
+  # @param l [Numeric] The lightness component (L) in the OKLAB color space, typically in range 0 to 1
+  # @param a [Numeric] The green-red component (a) in the OKLAB color space
+  # @param b [Numeric] The blue-yellow component (b) in the OKLAB color space
+  # @param alpha [Float] The alpha (opacity) value, ranging from 0.0 (transparent) to 1.0 (opaque), defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the OKLAB color space
   def from_oklab(l, a, b, alpha = 1.0)
     Color.from_oklab(l, a, b, alpha)
   end
 
+  # Creates a new color from OKLCH color space values.
+  # 
+  # @param l [Numeric] The lightness value, typically in range 0-1
+  # @param a [Numeric] The chroma (colorfulness) value
+  # @param b [Numeric] The hue angle value in degrees (0-360)
+  # @param alpha [Numeric] The alpha (opacity) value, between 0-1 (default: 1.0)
+  # @return [Abachrome::Color] A new color object initialized with the given OKLCH values
   def from_oklch(l, a, b, alpha = 1.0)
     Color.from_oklch(l, a, b, alpha)
   end
 
+  # Creates a color object from a hexadecimal color code string.
+  # 
+  # @param hex_str [String] The hexadecimal color code string to parse. Can be in formats like
+  # "#RGB", "#RRGGBB", "RGB", or "RRGGBB", with or without the leading "#" character.
+  # @return [Abachrome::Color] A new Color object representing the parsed hexadecimal color.
+  # @example
+  # Abachrome.from_hex("#ff0000") # => returns a red Color object
+  # Abachrome.from_hex("00ff00")  # => returns a green Color object
+  # @see Abachrome::Parsers::Hex.parse
   def from_hex(hex_str)
     Parsers::Hex.parse(hex_str)
   end
 
+  # Creates a color object from a CSS color name.
+  # 
+  # @param color_name [String] The CSS color name (e.g., 'red', 'blue', 'cornflowerblue').
+  # Case-insensitive.
+  # @return [Abachrome::Color, nil] A color object in the RGB color space if the name is valid,
+  # nil if the color name is not recognized.
   def from_name(color_name)
     rgb_values = Named::CSS::ColorNames[color_name.downcase]
     return nil unless rgb_values
@@ -85,14 +127,34 @@ module Abachrome
     from_rgb(*rgb_values.map { |v| v / 255.0 })
   end
 
+  # Convert a color from its current color space to another color space.
+  # 
+  # @param color [Abachrome::Color] The color object to convert
+  # @param to_space [Symbol, String] The destination color space identifier (e.g. :srgb, :oklch)
+  # @return [Abachrome::Color] A new color object in the specified color space
   def convert(color, to_space)
     Converter.convert(color, to_space)
   end
 
+  # Register a new color space with the Abachrome library.
+  # 
+  # @param name [Symbol, String] The identifier for the color space being registered
+  # @param block [Proc] A block that defines the color space properties and conversion rules
+  # @return [Abachrome::ColorSpace] The newly registered color space object
   def register_color_space(name, &block)
     ColorSpace.register(name, &block)
   end
 
+  # Register a new color space converter in the Abachrome system.
+  # 
+  # This method allows registering custom converters between color spaces.
+  # Converters are used to transform color representations from one color
+  # space to another.
+  # 
+  # @param from_space [Symbol, String] The source color space identifier
+  # @param to_space [Symbol, String] The destination color space identifier
+  # @param converter [#call] An object responding to #call that performs the conversion
+  # @return [void]
   def register_converter(from_space, to_space, converter)
     Converter.register(from_space, to_space, converter)
   end
