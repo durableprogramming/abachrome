@@ -10,7 +10,7 @@ module Abachrome
 
     attr_accessor :value, :precision
 
-    def_delegators :@value, :to_i, :to_f, :zero?, :nonzero?
+    def_delegators :@value, :to_i, :zero?, :nonzero?
 
     # Initializes a new AbcDecimal object with the specified value and precision.
     # 
@@ -260,10 +260,6 @@ module Abachrome
     # false otherwise.
     def <=(other)
       @value <= (other.is_a?(AbcDecimal) ? other.value : AbcDecimal(other).value)
-    end
-
-    def clamp(*args)
-      AbcDecimal(@value.clamp(*args))
     end
 
     # @overload round(*args)
