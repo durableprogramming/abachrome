@@ -1,4 +1,22 @@
-# frozen_string_literal: true
+# Abachrome::Converters::SrgbToOklch - sRGB to OKLCH color space converter
+#
+# This converter transforms colors from the standard RGB (sRGB) color space to the OKLCH color space
+# through a two-step conversion process. The transformation first converts sRGB gamma-corrected
+# values to OKLAB rectangular coordinates as an intermediate step, then applies cylindrical coordinate
+# conversion to produce the final OKLCH values with lightness, chroma, and hue components.
+#
+# Key features:
+# - Two-stage conversion pipeline: sRGB → OKLAB → OKLCH
+# - Leverages existing SrgbToOklab and OklabToOklch converters for modular transformation
+# - Converts display-ready RGB values to perceptually uniform cylindrical coordinates
+# - Maintains alpha channel transparency values during conversion
+# - Uses AbcDecimal arithmetic for precise color science calculations
+# - Validates input color space to ensure proper sRGB source data
+#
+# The OKLCH color space provides an intuitive interface for color manipulation through its
+# cylindrical coordinate system, making it ideal for hue adjustments, saturation modifications,
+# and other color operations that benefit from polar coordinates while maintaining perceptual
+# uniformity for natural-looking color transformations.
 
 require_relative "srgb_to_oklab"
 require_relative "oklab_to_oklch"

@@ -1,4 +1,21 @@
-# frozen_string_literal: true
+# Abachrome::ColorMixins::ToOklab - OKLAB color space conversion functionality
+#
+# This mixin provides methods for converting colors to the OKLAB color space, which is a
+# perceptually uniform color space designed for better color manipulation and comparison.
+# OKLAB provides more intuitive lightness adjustments and color blending compared to
+# traditional RGB color spaces, making it ideal for color science applications.
+#
+# Key features:
+# - Convert colors to OKLAB with automatic converter lookup
+# - Both non-destructive (to_oklab) and destructive (to_oklab!) conversion methods
+# - Direct access to OKLAB components (lightness, a, b)
+# - Utility methods for OKLAB array and value extraction
+# - Optimized to return the same object when no conversion is needed
+# - High-precision decimal arithmetic for accurate color science calculations
+#
+# The OKLAB color space uses three components: L (lightness), a (green-red axis), and
+# b (blue-yellow axis), providing a more perceptually uniform representation of colors
+# that better matches human visual perception compared to traditional color spaces.
 
 require_relative "../converter"
 

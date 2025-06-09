@@ -1,4 +1,22 @@
-# frozen_string_literal: true
+# Abachrome::ColorSpace - Core color space definition and registry system
+#
+# This module provides the foundation for managing color spaces within the Abachrome library.
+# It implements a registry system for storing and retrieving color space definitions, along
+# with the ColorSpace class that encapsulates color space properties including coordinate
+# names, white points, and color models.
+#
+# Key features:
+# - Global registry for color space registration and lookup with alias support
+# - Color space definition with configurable coordinates, white points, and color models
+# - Built-in registration of standard color spaces (sRGB, linear RGB, HSL, LAB, OKLAB, OKLCH)
+# - Equality comparison and hash support for color space objects
+# - Flexible initialization through block-based configuration
+# - Support for color space aliases (e.g., :rgb as alias for :srgb)
+#
+# The ColorSpace class serves as the foundation for the Color class and converter system,
+# providing the metadata needed for proper color representation and transformation between
+# different color spaces. All registered color spaces are accessible through the registry
+# class methods and can be extended with custom color space definitions.
 
 module Abachrome
   class ColorSpace

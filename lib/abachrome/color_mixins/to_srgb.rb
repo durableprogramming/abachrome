@@ -1,4 +1,21 @@
-# frozen_string_literal: true
+# Abachrome::ColorMixins::ToSrgb - sRGB color space conversion functionality
+#
+# This mixin provides methods for converting colors to the sRGB color space, which is the
+# standard RGB color space used in most displays and web applications. sRGB uses gamma
+# correction to better match human visual perception compared to linear RGB, making it
+# ideal for display purposes and color output in digital media.
+#
+# Key features:
+# - Convert colors to sRGB with automatic converter lookup
+# - Both non-destructive (to_srgb/to_rgb) and destructive (to_srgb!/to_rgb!) conversion methods
+# - Direct access to sRGB components (red, green, blue)
+# - Utility methods for RGB array and hex string output
+# - Optimized to return the same object when no conversion is needed
+# - High-precision decimal arithmetic for accurate color science calculations
+#
+# The sRGB color space is the default RGB color space for web content and most consumer
+# displays, providing a standardized way to represent colors that will appear consistently
+# across different devices and applications.
 
 require_relative "../converter"
 

@@ -1,4 +1,23 @@
-# frozen_string_literal: true
+# Abachrome::Converters::OklabToOklch - OKLAB to OKLCH color space converter
+#
+# This converter transforms colors from the OKLAB color space to the OKLCH color space
+# using cylindrical coordinate conversion. The transformation converts the rectangular
+# coordinates (L, a, b) to cylindrical coordinates (L, C, h) where lightness remains
+# unchanged, chroma is calculated as the Euclidean distance in the a-b plane, and hue
+# is calculated as the angle in the a-b plane expressed in degrees.
+#
+# Key features:
+# - Converts OKLAB rectangular coordinates to OKLCH cylindrical coordinates
+# - Preserves lightness component unchanged during conversion
+# - Calculates chroma as sqrt(a² + b²) for colorfulness representation
+# - Computes hue angle using atan2 function and normalizes to 0-360 degree range
+# - Maintains alpha channel transparency values during conversion
+# - Uses AbcDecimal arithmetic for precise color science calculations
+# - Validates input color space to ensure proper OKLAB source data
+#
+# The OKLCH color space provides an intuitive interface for color manipulation through
+# its cylindrical coordinate system, making it ideal for hue adjustments, saturation
+# modifications, and other color operations that benefit from polar coordinates.
 
 module Abachrome
   module Converters

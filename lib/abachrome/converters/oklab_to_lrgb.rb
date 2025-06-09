@@ -1,4 +1,22 @@
-# frozen_string_literal: true
+# Abachrome::Converters::OklabToLrgb - OKLAB to Linear RGB color space converter
+#
+# This converter transforms colors from the OKLAB color space to the linear RGB (LRGB) color space
+# using the standard OKLAB inverse transformation matrices. The conversion process applies a series of
+# matrix transformations and cubic operations to accurately map OKLAB coordinates back to the
+# linear RGB color space, which represents colors with a linear relationship to light intensity.
+#
+# Key features:
+# - Implements the official OKLAB to linear RGB inverse transformation algorithm with high-precision matrices
+# - Converts OKLAB values through intermediate L'M'S' and LMS color space representations
+# - Applies cubic operations to reverse the perceptual uniformity transformations
+# - Clamps negative RGB values to zero to ensure valid linear RGB output
+# - Maintains alpha channel transparency values during conversion
+# - Uses AbcDecimal arithmetic for precise color science calculations
+# - Validates input color space to ensure proper OKLAB source data
+#
+# The linear RGB color space provides the foundation for further conversions to display-ready
+# color spaces like sRGB, making this converter essential for the color transformation pipeline
+# when working with perceptually uniform OKLAB color manipulations.
 
 module Abachrome
   module Converters

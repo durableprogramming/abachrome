@@ -1,4 +1,20 @@
-# frozen_string_literal: true
+# Abachrome::ColorMixins::Lighten - Color lightness adjustment functionality
+#
+# This mixin provides methods for adjusting the lightness of colors by manipulating
+# the L (lightness) component in the OKLAB color space. The OKLAB color space is used
+# because it provides perceptually uniform lightness adjustments that appear more
+# natural to the human eye compared to adjustments in other color spaces.
+#
+# Key features:
+# - Lighten and darken colors with configurable amounts
+# - Both non-destructive (lighten/darken) and destructive (lighten!/darken!) variants
+# - Automatic clamping to valid lightness ranges [0, 1]
+# - High-precision decimal arithmetic for accurate color calculations
+# - Conversion to OKLAB color space for perceptually uniform adjustments
+#
+# The mixin includes both immutable methods that return new color instances and mutable
+# methods that modify the current color object in place, providing flexibility for
+# different use cases and performance requirements.
 
 module Abachrome
   module ColorMixins

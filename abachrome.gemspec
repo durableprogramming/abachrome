@@ -34,3 +34,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency "dry-inflector", "~> 1.0"
 
 end
+

@@ -1,4 +1,16 @@
-# frozen_string_literal: true
+# Abachrome::Converters::LrgbToSrgb - Linear RGB to sRGB color space converter
+#
+# This converter transforms colors from the linear RGB (LRGB) color space to the standard RGB (sRGB) color space by applying gamma correction. The conversion process applies the sRGB transfer function which uses different formulas for small and large values to match the non-linear response characteristics of typical display devices.
+#
+# Key features:
+# - Implements the standard sRGB gamma correction algorithm with precise threshold handling
+# - Converts linear RGB values to gamma-corrected sRGB values for proper display representation
+# - Applies different transformation functions based on value magnitude (linear vs power function)
+# - Maintains alpha channel transparency values during conversion
+# - Uses AbcDecimal arithmetic for precise color science calculations
+# - Validates input color space to ensure proper linear RGB source data
+#
+# The sRGB color space is the standard RGB color space for web content and most consumer displays, providing gamma correction that better matches human visual perception and display device characteristics compared to linear RGB values.
 
 module Abachrome
   module Converters

@@ -1,4 +1,22 @@
-# frozen_string_literal: true
+# Abachrome::PaletteMixins::Interpolate - Color palette interpolation functionality
+#
+# This mixin provides methods for interpolating between adjacent colors in a palette to create
+# smooth color transitions and gradients. The interpolation process inserts new colors between
+# existing palette colors by blending them at calculated intervals, creating smoother color
+# progressions ideal for gradients, color ramps, and visual transitions.
+#
+# Key features:
+# - Insert specified number of interpolated colors between each adjacent color pair
+# - Both non-destructive (interpolate) and destructive (interpolate!) variants
+# - Uses color blending in the current color space for smooth transitions
+# - Maintains original colors as anchor points in the interpolated result
+# - High-precision decimal arithmetic for accurate color calculations
+# - Preserves alpha values during interpolation process
+#
+# The mixin includes both immutable methods that return new palette instances and mutable
+# methods that modify the current palette object in place, providing flexibility for
+# different use cases and performance requirements. Interpolation is essential for creating
+# smooth color gradients and ensuring adequate color resolution in palette-based applications.
 
 module Abachrome
   module PaletteMixins

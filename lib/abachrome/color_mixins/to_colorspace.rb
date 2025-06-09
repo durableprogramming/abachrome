@@ -1,4 +1,20 @@
-# frozen_string_literal: true
+# Abachrome::ColorMixins::ToColorspace - Color space conversion functionality
+#
+# This mixin provides methods for converting colors between different color spaces within
+# the Abachrome library. It includes both immutable and mutable conversion methods that
+# allow colors to be transformed from their current color space to any registered target
+# color space, such as sRGB, OKLAB, OKLCH, or linear RGB.
+#
+# Key features:
+# - Convert colors to any registered color space with automatic converter lookup
+# - Both non-destructive (to_color_space/convert_to/in_color_space) and destructive variants
+# - Optimized to return the same object when no conversion is needed
+# - Flexible API with multiple method names for different use cases and preferences
+# - Integration with the Converter system for extensible color space transformations
+#
+# The mixin provides a consistent interface for color space conversions while maintaining
+# the precision and accuracy required for color science calculations through the use of
+# the underlying converter infrastructure.
 
 module Abachrome
   module ColorMixins

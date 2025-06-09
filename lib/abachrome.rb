@@ -1,4 +1,18 @@
-# frozen_string_literal: true
+# Abachrome - A Ruby color manipulation library
+#
+# This is the main entry point for the Abachrome library, providing color creation,
+# conversion, and manipulation capabilities across multiple color spaces including
+# sRGB, OKLAB, OKLCH, and linear RGB.
+#
+# Key features:
+# - Create colors from RGB, OKLAB, OKLCH values or hex strings
+# - Convert between different color spaces
+# - Parse colors from hex codes and CSS color names
+# - Register custom color spaces and converters
+# - High-precision decimal arithmetic for accurate color calculations
+#
+# The library uses autoloading for efficient memory usage and provides both
+# functional and object-oriented APIs for color operations.
 
 require_relative "abachrome/to_abcd"
 

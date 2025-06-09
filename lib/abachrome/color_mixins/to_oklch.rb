@@ -1,4 +1,21 @@
-# frozen_string_literal: true
+# Abachrome::ColorMixins::ToOklch - OKLCH color space conversion functionality
+#
+# This mixin provides methods for converting colors to the OKLCH color space, which is a
+# cylindrical representation of the OKLAB color space using lightness, chroma, and hue
+# coordinates. OKLCH offers intuitive color manipulation through its polar coordinate
+# system where hue is represented as an angle and chroma represents colorfulness.
+#
+# Key features:
+# - Convert colors to OKLCH with automatic converter lookup
+# - Both non-destructive (to_oklch) and destructive (to_oklch!) conversion methods
+# - Direct access to OKLCH components (lightness, chroma, hue)
+# - Utility methods for OKLCH array and value extraction
+# - Optimized to return the same object when no conversion is needed
+# - High-precision decimal arithmetic for accurate color science calculations
+#
+# The OKLCH color space uses three components: L (lightness), C (chroma/colorfulness),
+# and h (hue angle in degrees), providing an intuitive interface for color adjustments
+# that better matches human perception compared to traditional RGB-based color spaces.
 
 module Abachrome
   module ColorMixins

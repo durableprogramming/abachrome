@@ -1,4 +1,22 @@
-# frozen_string_literal: true
+# Abachrome::Converter - Color space conversion registry and orchestration system
+#
+# This module provides the central registry and conversion orchestration for transforming colors
+# between different color spaces within the Abachrome library. It manages a registry of converter
+# classes that handle transformations between specific color space pairs (e.g., sRGB to OKLAB,
+# OKLCH to linear RGB) and provides the main conversion interface used throughout the library.
+#
+# Key features:
+# - Global registry for color space converter registration with automatic discovery
+# - Converter lookup and routing between source and target color spaces
+# - Automatic registration of all converter classes found in the Converters namespace
+# - Conversion orchestration that finds appropriate converters based on color model compatibility
+# - Support for multi-step conversions through intermediate color spaces when needed
+# - Integration with the ColorSpace system for proper color space identification
+#
+# The Converter system serves as the backbone for all color transformations in Abachrome,
+# enabling seamless conversion between any registered color spaces while maintaining the
+# precision and accuracy required for color science calculations. Converter classes follow
+# a naming convention (FromSpaceToSpace) for automatic registration and discovery.
 
 module Abachrome
   class Converter

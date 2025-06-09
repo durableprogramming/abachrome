@@ -1,4 +1,22 @@
-# frozen_string_literal: true
+# Abachrome::Color - Core color representation class
+#
+# This is the central color class that represents colors across multiple color spaces
+# including sRGB, OKLAB, OKLCH, and linear RGB. The Color class encapsulates color
+# coordinates, alpha values, and color space information while providing methods
+# for color creation, conversion, and manipulation.
+#
+# Key features:
+# - Create colors from RGB, OKLAB, OKLCH values with factory methods
+# - Automatic coordinate validation against color space definitions
+# - Immutable color objects with equality and hash support
+# - Extensible through mixins for color space conversions and operations
+# - High-precision decimal arithmetic using AbcDecimal for accurate calculations
+# - Support for alpha (opacity) values with proper handling in conversions
+#
+# The class uses a mixin system to dynamically include functionality for converting
+# between color spaces, blending operations, and lightness adjustments. All coordinate
+# values are stored as AbcDecimal objects to maintain precision during color science
+# calculations and transformations.
 
 require "dry-inflector"
 require_relative "abc_decimal"

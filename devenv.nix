@@ -5,12 +5,10 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git pkgs.ncurses pkgs.asciinema pkgs.asciinema-agg];
+  packages = [ pkgs.git];
 
 	languages.ruby.enable = true;
-
-  languages.python.enable =  true;
-  languages.python.venv.enable =  true;
+	languages.ruby.version = "3.3.2";
 
   languages.javascript.enable = true;
   languages.javascript.npm.enable = true;

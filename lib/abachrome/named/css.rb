@@ -1,7 +1,4 @@
-# frozen_string_literal: true
-
-# Colors courtesy of w3c:
-# https://www.w3.org/wiki/CSS/Properties/color/keywords
+#
 
 module Abachrome
   module Named

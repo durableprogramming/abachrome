@@ -1,4 +1,17 @@
-# frozen_string_literal: true
+# Abachrome::AbcDecimal - High-precision decimal arithmetic for color calculations
+#
+# This class provides a wrapper around Ruby's BigDecimal to ensure consistent precision
+# across color space conversions and calculations. It handles the precision requirements
+# needed for accurate color manipulation while providing a convenient interface that
+# supports standard arithmetic operations and type coercion.
+#
+# The class is designed to work seamlessly with Ruby's numeric types while maintaining
+# the high precision necessary for color science calculations. It includes methods for
+# conversion between different numeric representations and implements the full set of
+# comparison and arithmetic operators.
+#
+# Default precision can be configured via the ABC_DECIMAL_PRECISION environment variable,
+# falling back to 24 significant digits if not specified.
 
 require "bigdecimal"
 require "forwardable"

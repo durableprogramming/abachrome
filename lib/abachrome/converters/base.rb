@@ -1,4 +1,20 @@
-# frozen_string_literal: true
+# Abachrome::Converters::Base - Abstract base class for color space converters
+#
+# This class provides the foundation for implementing color space conversion functionality
+# within the Abachrome library. It defines the interface that all converter classes must
+# implement and provides common validation and utility methods for color transformations.
+#
+# Key features:
+# - Abstract conversion interface requiring subclasses to implement #convert method
+# - Color model validation to ensure proper conversion compatibility
+# - Converter registration and lookup system for managing conversion mappings
+# - Source and target color space compatibility checking
+# - Base functionality for building specific converter implementations
+#
+# All converter classes in the Abachrome system inherit from this base class and implement
+# the specific mathematical transformations needed to convert colors between different
+# color spaces such as sRGB, OKLAB, OKLCH, and linear RGB. The class follows a naming
+# convention pattern (FromSpaceToSpace) for automatic registration and discovery.
 
 module Abachrome
   module Converters

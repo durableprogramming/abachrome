@@ -1,4 +1,22 @@
-# frozen_string_literal: true
+# Abachrome::ColorMixins::ToLrgb - Linear RGB color space conversion functionality
+#
+# This mixin provides methods for converting colors to the linear RGB (LRGB) color space,
+# which uses a linear relationship between stored numeric values and actual light intensity.
+# Linear RGB is essential for accurate color calculations and serves as an intermediate
+# color space for many color transformations, particularly when converting between
+# different color models.
+#
+# Key features:
+# - Convert colors to linear RGB with automatic converter lookup
+# - Both non-destructive (to_lrgb) and destructive (to_lrgb!) conversion methods
+# - Direct access to linear RGB components (lred, lgreen, lblue)
+# - Utility methods for RGB array and hex string output
+# - Optimized to return the same object when no conversion is needed
+# - High-precision decimal arithmetic for accurate color science calculations
+#
+# The linear RGB color space differs from standard sRGB by removing gamma correction,
+# making it suitable for mathematical operations like blending, lighting calculations,
+# and color space transformations that require linear light behavior.
 
 require_relative "../converter"
 

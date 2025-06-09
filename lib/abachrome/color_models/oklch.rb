@@ -1,4 +1,23 @@
-# frozen_string_literal: true
+# Abachrome::ColorModels::Oklch - OKLCH color space model definition
+#
+# This module defines the OKLCH color model within the Abachrome color manipulation library.
+# OKLCH is a cylindrical representation of the OKLAB color space using lightness, chroma, and hue
+# coordinates. OKLCH offers intuitive color manipulation through its polar coordinate
+# system where hue is represented as an angle and chroma represents colorfulness.
+#
+# Key features:
+# - Registers the OKLCH color space with coordinate names [lightness, chroma, hue]
+# - Provides conversion utilities between OKLCH and OKLAB color spaces
+# - Uses L (lightness) ranging from 0 (black) to 1 (white)
+# - Uses C (chroma) representing colorfulness intensity starting from 0
+# - Uses h (hue) as an angle in degrees from 0 to 360
+# - Includes normalization methods for proper coordinate ranges
+# - Maintains high precision through AbcDecimal arithmetic for color transformations
+#
+# The OKLCH model is particularly useful for color adjustments that need to appear natural
+# to human perception, such as hue shifts, saturation modifications, and lightness changes
+# where the cylindrical coordinate system provides more intuitive control compared to
+# rectangular color spaces.
 
 module Abachrome
   module ColorModels

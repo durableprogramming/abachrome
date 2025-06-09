@@ -1,4 +1,20 @@
-# frozen_string_literal: true
+# Abachrome::ColorMixins::Blend - Color blending and mixing functionality
+#
+# This mixin provides methods for blending and mixing colors together in various color spaces.
+# The blend operation interpolates between two colors by a specified amount, creating smooth
+# color transitions. All blending operations preserve alpha values and can be performed in
+# the current color space or a specified target color space for optimal results.
+#
+# Key features:
+# - Linear interpolation between colors with configurable blend amounts
+# - Support for blending in different color spaces (sRGB, OKLAB, OKLCH)
+# - Both non-destructive (blend/mix) and destructive (blend!/mix!) variants
+# - Automatic color space conversion when blending colors from different spaces
+# - High-precision decimal arithmetic for accurate color calculations
+#
+# The mixin includes both immutable methods that return new color instances and mutable
+# methods that modify the current color object in place, providing flexibility for
+# different use cases and performance requirements.
 
 module Abachrome
   module ColorMixins

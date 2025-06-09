@@ -1,4 +1,21 @@
-# frozen_string_literal: true
+# Abachrome::ColorModels::RGB - RGB color space model utilities
+#
+# This module provides utility methods for the RGB color model within the Abachrome
+# color manipulation library. RGB represents colors using red, green, and blue
+# components, which is the most common color model for digital displays and web
+# applications.
+#
+# Key features:
+# - Normalizes RGB component values to the [0, 1] range from various input formats
+# - Handles percentage values (with % suffix) by dividing by 100
+# - Handles 0-255 range values by dividing by 255
+# - Handles 0-1 range values directly without conversion
+# - Supports string and numeric input types for flexible color specification
+# - Maintains high precision through AbcDecimal arithmetic for color calculations
+#
+# The RGB model serves as a foundation for sRGB and linear RGB color spaces,
+# providing the basic coordinate normalization needed for accurate color
+# representation and conversion between different RGB-based color spaces.
 
 module Abachrome
   module ColorModels

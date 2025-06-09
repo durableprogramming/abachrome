@@ -1,4 +1,16 @@
-# frozen_string_literal: true
+# Abachrome::Converters::SrgbToLrgb - sRGB to Linear RGB color space converter
+#
+# This converter transforms colors from the standard RGB (sRGB) color space to the linear RGB (LRGB) color space by removing gamma correction. The conversion process applies the inverse sRGB transfer function which uses different formulas for small and large values to convert from the gamma-corrected sRGB representation to linear light intensity values.
+#
+# Key features:
+# - Implements the standard sRGB to linear RGB conversion algorithm with precise threshold handling
+# - Converts gamma-corrected sRGB values to linear RGB values for accurate color calculations
+# - Applies different transformation functions based on value magnitude (linear vs power function)
+# - Maintains alpha channel transparency values during conversion
+# - Uses AbcDecimal arithmetic for precise color science calculations
+# - Validates input color space to ensure proper sRGB source data
+#
+# The linear RGB color space provides a linear relationship between stored numeric values and actual light intensity, making it essential for accurate color calculations and serving as an intermediate color space for many color transformations, particularly when converting between different color models.
 
 module Abachrome
   module Converters
