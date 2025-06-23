@@ -62,6 +62,18 @@ module Abachrome
       new(space, [r, g, b], a)
     end
 
+    # Creates a new Color instance from LRGB values
+    # 
+    # @param r [Numeric] The red component value (typically 0-1)
+    # @param g [Numeric] The green component value (typically 0-1)
+    # @param b [Numeric] The blue component value (typically 0-1)
+    # @param a [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the sRGB color space
+    def self.from_lrgb(r, g, b, a = 1.0)
+      space = ColorSpace.find(:lrgb)
+      new(space, [r, g, b], a)
+    end
+
     # Creates a new Color object with OKLAB values.
     # 
     # @param l [Float] The lightness component (L) of the OKLAB color space

@@ -23,7 +23,7 @@ module Abachrome
 
     attr_accessor :value, :precision
 
-    def_delegators :@value, :to_i, :zero?, :nonzero?
+    def_delegators :@value, :to_i, :zero?, :nonzero?, :finite?
 
     # Initializes a new AbcDecimal object with the specified value and precision.
     # 

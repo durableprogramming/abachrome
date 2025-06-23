@@ -168,4 +168,16 @@ module Abachrome
     s.white_point = :D65
     s.color_model = :oklch
   end
+
+  ColorSpace.register(:xyz) do |s|
+    s.coordinates = %i[x y z]
+    s.white_point = :D65
+    s.color_model = :xyz
+  end
+
+  ColorSpace.register(:lms) do |s|
+    s.coordinates = %i[l m s]
+    s.white_point = :D65
+    s.color_model = :lms
+  end
 end

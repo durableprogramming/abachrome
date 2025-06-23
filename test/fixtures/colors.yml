@@ -1,0 +1,155 @@
+# Generated test color data
+# Created by test/generate_test_colors.rb
+# Do not edit manually
+
+---
+blanchedalmond:
+  rgb: rgb(255, 235, 205)
+  hex: "#ffebcd"
+  hsl: hsl(36, 100.0%, 90.2%)
+  lab: Lab(94, 2, 17)
+  oklab: OkLab(0.9484, 0.0093, 0.0439)
+cadetblue:
+  rgb: rgb(95, 158, 160)
+  hex: "#5f9ea0"
+  hsl: hsl(182, 25.5%, 50.0%)
+  lab: Lab(61, -20, -7)
+  oklab: OkLab(0.6577, -0.0617, -0.0205)
+coral:
+  rgb: rgb(255, 127, 80)
+  hex: "#ff7f50"
+  hsl: hsl(16, 100.0%, 65.7%)
+  lab: Lab(67, 45, 47)
+  oklab: OkLab(0.7351, 0.1282, 0.1085)
+cornsilk:
+  rgb: rgb(255, 248, 220)
+  hex: "#fff8dc"
+  hsl: hsl(48, 100.0%, 93.1%)
+  lab: Lab(97, -2, 14)
+  oklab: OkLab(0.9773, -0.0035, 0.0370)
+darkseagreen:
+  rgb: rgb(143, 188, 143)
+  hex: "#8fbc8f"
+  hsl: hsl(120, 25.1%, 64.9%)
+  lab: Lab(72, -24, 18)
+  oklab: OkLab(0.7509, -0.0651, 0.0459)
+darkviolet:
+  rgb: rgb(148, 0, 211)
+  hex: "#9400d3"
+  hsl: hsl(282, 100.0%, 41.4%)
+  lab: Lab(40, 76, -70)
+  oklab: OkLab(0.5149, 0.1670, -0.2003)
+deeppink:
+  rgb: rgb(255, 20, 147)
+  hex: "#ff1493"
+  hsl: hsl(328, 100.0%, 53.9%)
+  lab: Lab(56, 85, -6)
+  oklab: OkLab(0.6549, 0.2610, -0.0140)
+dodgerblue:
+  rgb: rgb(30, 144, 255)
+  hex: "#1e90ff"
+  hsl: hsl(210, 100.0%, 55.9%)
+  lab: Lab(59, 10, -63)
+  oklab: OkLab(0.6520, -0.0549, -0.1821)
+firebrick:
+  rgb: rgb(178, 34, 34)
+  hex: "#b22222"
+  hsl: hsl(0, 67.9%, 41.6%)
+  lab: Lab(39, 56, 38)
+  oklab: OkLab(0.4968, 0.1604, 0.0810)
+goldenrod:
+  rgb: rgb(218, 165, 32)
+  hex: "#daa520"
+  hsl: hsl(43, 74.4%, 49.0%)
+  lab: Lab(71, 9, 69)
+  oklab: OkLab(0.7516, 0.0154, 0.1461)
+gray:
+  rgb: rgb(128, 128, 128)
+  hex: "#808080"
+  hsl: hsl(0, 0.0%, 50.2%)
+  lab: Lab(54, 0, -0)
+  oklab: OkLab(0.5999, 0.0000, -0.0001)
+hotpink:
+  rgb: rgb(255, 105, 180)
+  hex: "#ff69b4"
+  hsl: hsl(330, 100.0%, 70.6%)
+  lab: Lab(65, 64, -11)
+  oklab: OkLab(0.7283, 0.1952, -0.0275)
+lightcyan:
+  rgb: rgb(224, 255, 255)
+  hex: "#e0ffff"
+  hsl: hsl(180, 100.0%, 93.9%)
+  lab: Lab(98, -10, -3)
+  oklab: OkLab(0.9779, -0.0307, -0.0093)
+lightgoldenrodyellow:
+  rgb: rgb(250, 250, 210)
+  hex: "#fafad2"
+  hsl: hsl(60, 80.0%, 90.2%)
+  lab: Lab(97, -6, 19)
+  oklab: OkLab(0.9750, -0.0154, 0.0494)
+lightseagreen:
+  rgb: rgb(32, 178, 170)
+  hex: "#20b2aa"
+  hsl: hsl(177, 69.5%, 41.2%)
+  lab: Lab(66, -38, -6)
+  oklab: OkLab(0.6912, -0.1128, -0.0179)
+mediumseagreen:
+  rgb: rgb(60, 179, 113)
+  hex: "#3cb371"
+  hsl: hsl(147, 49.8%, 46.9%)
+  lab: Lab(65, -48, 24)
+  oklab: OkLab(0.6841, -0.1305, 0.0608)
+mediumslateblue:
+  rgb: rgb(123, 104, 238)
+  hex: "#7b68ee"
+  hsl: hsl(249, 79.8%, 67.1%)
+  lab: Lab(52, 41, -65)
+  oklab: OkLab(0.6045, 0.0518, -0.1869)
+mediumvioletred:
+  rgb: rgb(199, 21, 133)
+  hex: "#c71585"
+  hsl: hsl(322, 80.9%, 43.1%)
+  lab: Lab(45, 71, -15)
+  oklab: OkLab(0.5533, 0.2181, -0.0398)
+oldlace:
+  rgb: rgb(253, 245, 230)
+  hex: "#fdf5e6"
+  hsl: hsl(39, 85.2%, 94.7%)
+  lab: Lab(97, 0, 8)
+  oklab: OkLab(0.9723, 0.0025, 0.0213)
+orchid:
+  rgb: rgb(218, 112, 214)
+  hex: "#da70d6"
+  hsl: hsl(302, 58.9%, 64.7%)
+  lab: Lab(63, 55, -34)
+  oklab: OkLab(0.7021, 0.1549, -0.0942)
+palegreen:
+  rgb: rgb(152, 251, 152)
+  hex: "#98fb98"
+  hsl: hsl(120, 92.5%, 79.0%)
+  lab: Lab(91, -48, 39)
+  oklab: OkLab(0.9036, -0.1316, 0.0952)
+peachpuff:
+  rgb: rgb(255, 218, 185)
+  hex: "#ffdab9"
+  hsl: hsl(28, 100.0%, 86.3%)
+  lab: Lab(89, 8, 21)
+  oklab: OkLab(0.9112, 0.0266, 0.0537)
+rebeccapurple:
+  rgb: rgb(102, 51, 153)
+  hex: "#663399"
+  hsl: hsl(270, 50.0%, 40.0%)
+  lab: Lab(33, 43, -47)
+  oklab: OkLab(0.4403, 0.0882, -0.1339)
+skyblue:
+  rgb: rgb(135, 206, 235)
+  hex: "#87ceeb"
+  hsl: hsl(197, 71.4%, 72.5%)
+  lab: Lab(79, -15, -21)
+  oklab: OkLab(0.8148, -0.0572, -0.0588)
+springgreen:
+  rgb: rgb(0, 255, 127)
+  hex: "#00ff7f"
+  hsl: hsl(150, 100.0%, 50.0%)
+  lab: Lab(88, -77, 47)
+  oklab: OkLab(0.8749, -0.2058, 0.1139)

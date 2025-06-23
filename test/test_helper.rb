@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require "minitest"
+require "minitest/autorun"
 
-require "simplecov"
-SimpleCov.start
 
 module Minitest
   class Test

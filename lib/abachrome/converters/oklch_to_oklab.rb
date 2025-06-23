@@ -33,9 +33,9 @@ module Abachrome
 
         l, c, h = oklch_color.coordinates.map { |_| AbcDecimal(_) }
 
-        h_rad = h * Rational(Math::PI, 180)
-        a = c * Math.cos(h_rad.value)
-        b = c * Math.sin(h_rad.value)
+        h_rad = (h * Math::PI)/ AD(180)
+        a = c * AD(Math.cos(h_rad.value))
+        b = c * AD(Math.sin(h_rad.value))
 
         Color.new(
           ColorSpace.find(:oklab),
