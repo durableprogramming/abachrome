@@ -129,7 +129,7 @@ module Abachrome
   end
 
   # Creates a color object from a CSS color name.
-  # 
+  #
   # @param color_name [String] The CSS color name (e.g., 'red', 'blue', 'cornflowerblue').
   # Case-insensitive.
   # @return [Abachrome::Color, nil] A color object in the RGB color space if the name is valid,
@@ -139,6 +139,15 @@ module Abachrome
     return nil unless rgb_values
 
     from_rgb(*rgb_values.map { |v| v / 255.0 })
+  end
+
+  # Parses a CSS color string and returns a Color object.
+  #
+  # @param css_string [String] The CSS color string to parse (e.g., "#ff0000", "rgb(255, 0, 0)", "red")
+  # @return [Abachrome::Color, nil] A Color object if parsing succeeds, nil otherwise
+  def parse(css_string)
+    require_relative "abachrome/parsers/css"
+    Parsers::CSS.parse(css_string)
   end
 
   # Convert a color from its current color space to another color space.
