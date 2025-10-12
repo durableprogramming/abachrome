@@ -1,0 +1,21 @@
+{
+  "document": {
+    "id": "abachrome-vex",
+    "author": "Durable Programming",
+    "timestamp": "2025-10-12T00:00:00Z",
+    "version": "1.0"
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "type": "package-url",
+        "name": "pkg:gem/abachrome",
+        "product": {
+          "name": "Abachrome",
+          "version": "*"
+        }
+      }
+    ]
+  },
+  "vulnerabilities": []
+}
