@@ -111,3 +111,5 @@ module Abachrome
   # Auto-register all converters
   Converter.register_all_converters
 end
+
+# Copyright (c) 2025 Durable Programming, LLC. All rights reserved.

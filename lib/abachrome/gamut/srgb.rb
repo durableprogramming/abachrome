@@ -43,3 +43,5 @@ module Abachrome
     register(SRGB.new)
   end
 end
+
+# Copyright (c) 2025 Durable Programming, LLC. All rights reserved.

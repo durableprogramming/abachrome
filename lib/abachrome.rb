@@ -173,3 +173,5 @@ module Abachrome
     Converter.register(from_space, to_space, converter)
   end
 end
+
+# Copyright (c) 2025 Durable Programming, LLC. All rights reserved.

@@ -19,3 +19,5 @@ end
 [Numeric, String, Rational].each do |klass|
   klass.include(Abachrome::ToAbcd)
 end
+
+# Copyright (c) 2025 Durable Programming, LLC. All rights reserved.
