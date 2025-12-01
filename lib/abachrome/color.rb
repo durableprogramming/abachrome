@@ -134,7 +134,7 @@ module Abachrome
     end
 
     # Returns a string representation of the color in the format "ColorSpaceName(coord1, coord2, coord3, alpha)"
-    # 
+    #
     # @return [String] A human-readable string representation of the color showing its
     # color space name, coordinate values rounded to 3 decimal places, and alpha value
     # (if not 1.0)
@@ -142,6 +142,14 @@ module Abachrome
       coord_str = coordinates.map { |c| c.to_f.round(3) }.join(", ")
       alpha_str = alpha == AbcDecimal.new("1.0") ? "" : ", #{alpha.to_f.round(3)}"
       "#{color_space.name}(#{coord_str}#{alpha_str})"
+    end
+
+    # Returns the color as a hexadecimal string representation.
+    #
+    # @return [String] A hex color string in the format "#RRGGBB" or "#RRGGBBAA" if alpha < 1.0
+    def to_hex
+      require_relative "outputs/css"
+      Outputs::CSS.format_hex(self)
     end
 
     private
