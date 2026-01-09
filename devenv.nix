@@ -5,7 +5,7 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git];
+  packages = [ pkgs.git pkgs.ncurses];
 
 	languages.ruby.enable = true;
 	languages.ruby.version = "3.3.2";

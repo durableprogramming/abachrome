@@ -180,4 +180,16 @@ module Abachrome
     s.white_point = :D65
     s.color_model = :lms
   end
+
+  ColorSpace.register(:yiq) do |s|
+    s.coordinates = %i[y i q]
+    s.white_point = :D65
+    s.color_model = :yiq
+  end
+
+  ColorSpace.register(:cmyk) do |s|
+    s.coordinates = %i[cyan magenta yellow key]
+    s.white_point = :D50
+    s.color_model = :cmyk
+  end
 end

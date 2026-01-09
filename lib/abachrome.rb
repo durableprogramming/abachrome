@@ -29,9 +29,11 @@ module Abachrome
   autoload :VERSION, "abachrome/version"
 
   module ColorModels
+    autoload :CMYK, "abachrome/color_models/cmyk"
     autoload :HSV, "abachrome/color_models/hsv"
     autoload :Oklab, "abachrome/color_models/oklab"
     autoload :RGB, "abachrome/color_models/rgb"
+    autoload :YIQ, "abachrome/color_models/yiq"
   end
 
   module ColorMixins
@@ -139,6 +141,29 @@ module Abachrome
     return nil unless rgb_values
 
     from_rgb(*rgb_values.map { |v| v / 255.0 })
+  end
+
+  # Creates a color in the YIQ color space.
+  #
+  # @param y [Numeric] The luma (brightness) component, typically in range 0 to 1
+  # @param i [Numeric] The in-phase component (orange-blue), typically in range -0.5957 to 0.5957
+  # @param q [Numeric] The quadrature component (purple-green), typically in range -0.5226 to 0.5226
+  # @param alpha [Float] The alpha (opacity) value, ranging from 0.0 (transparent) to 1.0 (opaque), defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the YIQ color space
+  def from_yiq(y, i, q, alpha = 1.0)
+    Color.from_yiq(y, i, q, alpha)
+  end
+
+  # Creates a color in the CMYK color space.
+  #
+  # @param c [Numeric] The cyan component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param m [Numeric] The magenta component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param y [Numeric] The yellow component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param k [Numeric] The key/black component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param alpha [Float] The alpha (opacity) value, ranging from 0.0 (transparent) to 1.0 (opaque), defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the CMYK color space
+  def from_cmyk(c, m, y, k, alpha = 1.0)
+    Color.from_cmyk(c, m, y, k, alpha)
   end
 
   # Parses a CSS color string and returns a Color object.

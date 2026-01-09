@@ -87,7 +87,7 @@ module Abachrome
     end
 
     # Creates a new color instance in the OKLCH color space.
-    # 
+    #
     # @param l [Numeric] The lightness component (L), typically in range 0..1
     # @param c [Numeric] The chroma component (C), typically starting from 0 with no upper bound
     # @param h [Numeric] The hue component (H) in degrees, typically in range 0..360
@@ -96,6 +96,31 @@ module Abachrome
     def self.from_oklch(l, c, h, alpha = 1.0)
       space = ColorSpace.find(:oklch)
       new(space, [l, c, h], alpha)
+    end
+
+    # Creates a new Color instance from YIQ values
+    #
+    # @param y [Numeric] The luma (brightness) component, typically in range 0 to 1
+    # @param i [Numeric] The in-phase component (orange-blue), typically in range -0.5957 to 0.5957
+    # @param q [Numeric] The quadrature component (purple-green), typically in range -0.5226 to 0.5226
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the YIQ color space
+    def self.from_yiq(y, i, q, alpha = 1.0)
+      space = ColorSpace.find(:yiq)
+      new(space, [y, i, q], alpha)
+    end
+
+    # Creates a new Color instance from CMYK values
+    #
+    # @param c [Numeric] The cyan component, typically in range 0 to 1
+    # @param m [Numeric] The magenta component, typically in range 0 to 1
+    # @param y [Numeric] The yellow component, typically in range 0 to 1
+    # @param k [Numeric] The key/black component, typically in range 0 to 1
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the CMYK color space
+    def self.from_cmyk(c, m, y, k, alpha = 1.0)
+      space = ColorSpace.find(:cmyk)
+      new(space, [c, m, y, k], alpha)
     end
 
     # Compares this color instance with another for equality.
