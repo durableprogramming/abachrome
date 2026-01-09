@@ -353,3 +353,5 @@ end
 def AD(*args)
   Abachrome::AbcDecimal.new(*args)
 end
+
+# Copyright (c) 2025 Durable Programming, LLC. All rights reserved.

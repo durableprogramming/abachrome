@@ -32,3 +32,5 @@ ColorSpace.register(
   nil,
   []
 )
+
+# Copyright (c) 2025 Durable Programming, LLC. All rights reserved.
