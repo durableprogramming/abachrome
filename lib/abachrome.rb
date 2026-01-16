@@ -25,6 +25,7 @@ module Abachrome
   autoload :ColorSpace, "abachrome/color_space"
   autoload :Converter, "abachrome/converter"
   autoload :Gamut, "abachrome/gamut/base"
+  autoload :Spectral, "abachrome/spectral"
   autoload :ToAbcd, "abachrome/to_abcd"
   autoload :VERSION, "abachrome/version"
 
@@ -164,6 +165,34 @@ module Abachrome
   # @return [Abachrome::Color] A new Color object in the CMYK color space
   def from_cmyk(c, m, y, k, alpha = 1.0)
     Color.from_cmyk(c, m, y, k, alpha)
+  end
+
+  # Mix multiple colors using Kubelka-Munk spectral mixing.
+  #
+  # This function produces more realistic color mixing than simple RGB or LAB interpolation
+  # by simulating how real pigments absorb and scatter light. Based on spectral.js by
+  # Ronald van Wijnen (https://github.com/rvanwijnen/spectral.js)
+  #
+  # @param colors [Array<Hash>] Array of hashes with :color (Abachrome::Color) and :weight (Numeric)
+  # @param tinting_strengths [Hash] Optional hash mapping colors to tinting strengths (default: 1.0)
+  # @return [Abachrome::Color] The mixed color
+  #
+  # @example Mix red and blue with equal weights
+  #   red = Abachrome.from_rgb(1, 0, 0)
+  #   blue = Abachrome.from_rgb(0, 0, 1)
+  #   purple = Abachrome.spectral_mix([
+  #     {color: red, weight: 1},
+  #     {color: blue, weight: 1}
+  #   ])
+  #
+  # @example Mix three colors with different weights
+  #   mixed = Abachrome.spectral_mix([
+  #     {color: red, weight: 2},
+  #     {color: green, weight: 1},
+  #     {color: blue, weight: 1}
+  #   ])
+  def spectral_mix(colors, tinting_strengths: {})
+    Spectral.mix(colors, tinting_strengths: tinting_strengths)
   end
 
   # Parses a CSS color string and returns a Color object.
