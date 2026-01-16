@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::SrgbToOklch - sRGB to OKLCH color space converter
 #
 # This converter transforms colors from the standard RGB (sRGB) color space to the OKLCH color space
@@ -25,7 +27,7 @@ module Abachrome
   module Converters
     class SrgbToOklch < Abachrome::Converters::Base
       # Converts an sRGB color to OKLCH color space
-      # 
+      #
       # @param srgb_color [Abachrome::Color] The color in sRGB color space to convert
       # @return [Abachrome::Color] The converted color in OKLCH color space
       # @note This is a two-step conversion process: first from sRGB to OKLab, then from OKLab to OKLCH
@@ -34,7 +36,7 @@ module Abachrome
       def self.convert(srgb_color)
         # First convert sRGB to OKLab
         oklab_color = SrgbToOklab.convert(srgb_color)
-        
+
         # Then convert OKLab to OKLCh
         OklabToOklch.convert(oklab_color)
       end

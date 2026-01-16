@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Spectral - Kubelka-Munk spectral color mixing
 #
 # This module implements the Kubelka-Munk theory for realistic paint-like color mixing.
@@ -126,7 +128,7 @@ module Abachrome
     # Companding: linear RGB to sRGB
     def compand(x)
       x = x.to_f
-      x > 0.0031308 ? 1.055 * x**(1.0 / GAMMA) - 0.055 : x * 12.92
+      x > 0.0031308 ? (1.055 * (x**(1.0 / GAMMA))) - 0.055 : x * 12.92
     end
 
     # Convert sRGB [0-1] to linear RGB
@@ -153,7 +155,9 @@ module Abachrome
 
       # Extract white component
       w = [r, g, b].min
-      r, g, b = r - w, g - w, b - w
+      r -= w
+      g -= w
+      b -= w
 
       # Extract CMY components
       c = [g, b].min
@@ -166,20 +170,18 @@ module Abachrome
       b_pure = [0, [b - g, b - r].min].max
 
       # Combine spectral curves
-      reflectance = Array.new(SIZE) do |i|
+      Array.new(SIZE) do |i|
         [
           Float::EPSILON,
-          w * BASE_SPECTRA[:W][i] +
-          c * BASE_SPECTRA[:C][i] +
-          m * BASE_SPECTRA[:M][i] +
-          y * BASE_SPECTRA[:Y][i] +
-          r_pure * BASE_SPECTRA[:R][i] +
-          g_pure * BASE_SPECTRA[:G][i] +
-          b_pure * BASE_SPECTRA[:B][i]
+          (w * BASE_SPECTRA[:W][i]) +
+            (c * BASE_SPECTRA[:C][i]) +
+            (m * BASE_SPECTRA[:M][i]) +
+            (y * BASE_SPECTRA[:Y][i]) +
+            (r_pure * BASE_SPECTRA[:R][i]) +
+            (g_pure * BASE_SPECTRA[:G][i]) +
+            (b_pure * BASE_SPECTRA[:B][i])
         ].max
       end
-
-      reflectance
     end
 
     # Convert spectral reflectance to XYZ using CIE color matching functions
@@ -200,13 +202,13 @@ module Abachrome
     # Kubelka-Munk absorption/scattering parameter
     # Converts reflectance R to absorption/scattering coefficient KS
     def ks_from_reflectance(r)
-      (1.0 - r)**2 / (2.0 * r)
+      ((1.0 - r)**2) / (2.0 * r)
     end
 
     # Inverse Kubelka-Munk function
     # Converts KS back to reflectance
     def reflectance_from_ks(ks)
-      1.0 + ks - Math.sqrt(ks**2 + 2.0 * ks)
+      1.0 + ks - Math.sqrt((ks**2) + (2.0 * ks))
     end
 
     # Calculate luminance from XYZ (Y component)
@@ -246,7 +248,7 @@ module Abachrome
         # Calculate effective concentration
         # Note: weight is already normalized (sums to 1), so we don't square it
         # spectral.js squares 'factor' because it uses unnormalized values
-        concentration = weight * tinting_strength**2 * luminance
+        concentration = weight * (tinting_strength**2) * luminance
 
         {
           ks_values: ks_values,

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Abachrome
   module Converters
     class OklchToXyz < Abachrome::Converters::Base
@@ -40,9 +42,9 @@ module Abachrome
         # Step 4: LMS to LRGB
         # (r_lrgb, g_lrgb, b_lrgb)
         # Using matrix M_lrgb_from_lms (OKLAB specific)
-        r_lrgb = (l_lms * AD("4.07674166134799"))   + (m_lms * AD("-3.307711590408193")) + (s_lms * AD("0.230969928729428"))
+        r_lrgb = (l_lms * AD("4.07674166134799")) + (m_lms * AD("-3.307711590408193")) + (s_lms * AD("0.230969928729428"))
         g_lrgb = (l_lms * AD("-1.2684380040921763")) + (m_lms * AD("2.6097574006633715")) + (s_lms * AD("-0.3413193963102197"))
-        b_lrgb = (l_lms * AD("-0.004196086541837188"))+ (m_lms * AD("-0.7034186144594493")) + (s_lms * AD("1.7076147009309444"))
+        b_lrgb = (l_lms * AD("-0.004196086541837188")) + (m_lms * AD("-0.7034186144594493")) + (s_lms * AD("1.7076147009309444"))
 
         # Clamp LRGB values to be non-negative (as done in LmsToLrgb.rb)
         # Using the pattern [AbcDecimal, Integer].max which relies on AbcDecimal's <=> coercion.
@@ -51,7 +53,7 @@ module Abachrome
         r_lrgb_clamped = [r_lrgb, zero_ad].max
         g_lrgb_clamped = [g_lrgb, zero_ad].max
         b_lrgb_clamped = [b_lrgb, zero_ad].max
-        
+
         # Step 5: LRGB to XYZ
         # (x_xyz, y_xyz, z_xyz)
         # Using matrix M_xyz_from_lrgb (sRGB D65)

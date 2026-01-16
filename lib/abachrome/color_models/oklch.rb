@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::Oklch - OKLCH color space model definition
 #
 # This module defines the OKLCH color model within the Abachrome color manipulation library.
@@ -23,7 +25,7 @@ module Abachrome
   module ColorModels
     class Oklch
       # Normalizes OKLCH color values to their standard ranges.
-      # 
+      #
       # @param l [Numeric] The lightness component, will be clamped to range 0-1
       # @param c [Numeric] The chroma component, will be clamped to range 0-1
       # @param h [Numeric] The hue component in degrees, will be normalized to range 0-360
@@ -45,7 +47,7 @@ module Abachrome
       end
 
       # Converts OKLCH color coordinates to OKLab color coordinates.
-      # 
+      #
       # @param l [Numeric] The lightness value in the OKLCH color space
       # @param c [Numeric] The chroma value in the OKLCH color space
       # @param h [Numeric] The hue value in degrees in the OKLCH color space
@@ -59,7 +61,7 @@ module Abachrome
       end
 
       # Converts OKLab color coordinates to OKLCH color coordinates.
-      # 
+      #
       # @param l [Numeric] The lightness component from OKLab.
       # @param a [Numeric] The green-red component from OKLab.
       # @param b [Numeric] The blue-yellow component from OKLab.

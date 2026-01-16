@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::Xyz - XYZ color space model definition
 #
 # This module defines the XYZ color model within the Abachrome color manipulation library.

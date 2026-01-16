@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Gamut::SRGB - sRGB color gamut definition and validation
 #
 # This module defines the sRGB color gamut within the Abachrome color manipulation library.
@@ -34,7 +36,7 @@ module Abachrome
 
       def contains?(coordinates)
         r, g, b = coordinates
-        r >= 0 && r <= 1 &&
+        r.between?(0, 1) &&
           g >= 0 && g <= 1 &&
           b >= 0 && b <= 1
       end

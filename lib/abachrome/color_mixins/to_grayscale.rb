@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorMixins::ToGrayscale - Grayscale conversion mixin
 #
 # This mixin provides methods for converting colors to grayscale using various
@@ -26,7 +28,7 @@ module Abachrome
         r, g, b = rgb_color.coordinates
 
         # Rec. 601 luma: Y = 0.299R + 0.587G + 0.114B
-        luma = AD("0.299") * r + AD("0.587") * g + AD("0.114") * b
+        luma = (AD("0.299") * r) + (AD("0.587") * g) + (AD("0.114") * b)
 
         Color.from_rgb(luma, luma, luma, alpha)
       end
@@ -39,7 +41,7 @@ module Abachrome
         r, g, b = rgb_color.coordinates
 
         # Rec. 709 luma: Y = 0.2126R + 0.7152G + 0.0722B
-        luma = AD("0.2126") * r + AD("0.7152") * g + AD("0.0722") * b
+        luma = (AD("0.2126") * r) + (AD("0.7152") * g) + (AD("0.0722") * b)
 
         Color.from_rgb(luma, luma, luma, alpha)
       end
@@ -60,7 +62,7 @@ module Abachrome
       def luma_601
         rgb_color = to_srgb
         r, g, b = rgb_color.coordinates
-        AD("0.299") * r + AD("0.587") * g + AD("0.114") * b
+        (AD("0.299") * r) + (AD("0.587") * g) + (AD("0.114") * b)
       end
 
       # Calculates the relative luminance (luma) value using Rec. 709 coefficients.
@@ -70,7 +72,7 @@ module Abachrome
       def luma_709
         rgb_color = to_srgb
         r, g, b = rgb_color.coordinates
-        AD("0.2126") * r + AD("0.7152") * g + AD("0.0722") * b
+        (AD("0.2126") * r) + (AD("0.7152") * g) + (AD("0.0722") * b)
       end
 
       # Calculates the relative luminance using the default Rec. 601 standard.

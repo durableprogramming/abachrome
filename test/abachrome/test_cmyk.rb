@@ -11,7 +11,7 @@ class TestCMYK < Minitest::Test
   def test_cmyk_color_space_exists
     refute_nil @cmyk_space
     assert_equal :cmyk, @cmyk_space.name
-    assert_equal [:cyan, :magenta, :yellow, :key], @cmyk_space.coordinates
+    assert_equal %i[cyan magenta yellow key], @cmyk_space.coordinates
   end
 
   def test_from_cmyk
@@ -248,7 +248,9 @@ class TestCMYK < Minitest::Test
     # Verify that UCR and GCR with same amount produce same results
     require_relative "../../lib/abachrome/color_models/cmyk"
 
-    r, g, b = 0.3, 0.5, 0.7
+    r = 0.3
+    g = 0.5
+    b = 0.7
     gcr_amount = 0.6
 
     ucr_result = Abachrome::ColorModels::CMYK.from_rgb_ucr(r, g, b, gcr_amount)
@@ -264,7 +266,9 @@ class TestCMYK < Minitest::Test
     # Verify that naive conversion is same as GCR with 0% amount
     require_relative "../../lib/abachrome/color_models/cmyk"
 
-    r, g, b = 0.6, 0.4, 0.2
+    r = 0.6
+    g = 0.4
+    b = 0.2
 
     naive_result = Abachrome::ColorModels::CMYK.from_rgb_naive(r, g, b)
     gcr_zero_result = Abachrome::ColorModels::CMYK.from_rgb_gcr(r, g, b, 0.0)
@@ -300,7 +304,9 @@ class TestCMYK < Minitest::Test
     # Verify that GCR reduces total ink coverage compared to naive
     require_relative "../../lib/abachrome/color_models/cmyk"
 
-    r, g, b = 0.5, 0.5, 0.5
+    r = 0.5
+    g = 0.5
+    b = 0.5
 
     naive = Abachrome::ColorModels::CMYK.from_rgb_naive(r, g, b)
     gcr_full = Abachrome::ColorModels::CMYK.from_rgb_gcr(r, g, b, 1.0)
@@ -423,7 +429,9 @@ class TestCMYK < Minitest::Test
     # Test calling ColorModels::CMYK methods directly
     require_relative "../../lib/abachrome/color_models/cmyk"
 
-    r, g, b = 0.4, 0.6, 0.8
+    r = 0.4
+    g = 0.6
+    b = 0.8
 
     # Test naive
     c, m, y, k = Abachrome::ColorModels::CMYK.from_rgb_naive(r, g, b)
@@ -444,7 +452,10 @@ class TestCMYK < Minitest::Test
     # Test calling ColorModels::CMYK.to_rgb directly
     require_relative "../../lib/abachrome/color_models/cmyk"
 
-    c, m, y, k = 0.2, 0.4, 0.6, 0.1
+    c = 0.2
+    m = 0.4
+    y = 0.6
+    k = 0.1
 
     r, g, b = Abachrome::ColorModels::CMYK.to_rgb(c, m, y, k)
 

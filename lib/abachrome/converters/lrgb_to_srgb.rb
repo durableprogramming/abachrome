@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::LrgbToSrgb - Linear RGB to sRGB color space converter
 #
 # This converter transforms colors from the linear RGB (LRGB) color space to the standard RGB (sRGB) color space by applying gamma correction. The conversion process applies the sRGB transfer function which uses different formulas for small and large values to match the non-linear response characteristics of typical display devices.
@@ -16,7 +18,7 @@ module Abachrome
   module Converters
     class LrgbToSrgb < Abachrome::Converters::Base
       # Converts a color from linear RGB to sRGB color space.
-      # 
+      #
       # @param lrgb_color [Abachrome::Color] The color in linear RGB color space to convert
       # @return [Abachrome::Color] A new Color object in sRGB color space with the converted coordinates
       # @raise [TypeError] If the provided color is not in linear RGB color space
@@ -34,11 +36,11 @@ module Abachrome
       end
 
       # Converts a linear RGB value to standard RGB color space (sRGB) value.
-      # 
+      #
       # This method implements the standard linearization function used in the sRGB color space.
       # For small values (≤ 0.0031308), a simple linear transformation is applied.
       # For larger values, a power function with gamma correction is used.
-      # 
+      #
       # @param v [AbcDecimal] The linear RGB value to convert
       # @return [AbcDecimal] The corresponding sRGB value, preserving the sign of the input
       def self.to_srgb(v)

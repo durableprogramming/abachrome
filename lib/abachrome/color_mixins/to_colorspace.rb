@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorMixins::ToColorspace - Color space conversion functionality
 #
 # This mixin provides methods for converting colors between different color spaces within
@@ -20,11 +22,11 @@ module Abachrome
   module ColorMixins
     module ToColorspace
       # Converts the current color to the specified target color space.
-      # 
+      #
       # This method transforms the current color into an equivalent color in a different
       # color space. If the target space is the same as the current color space, no
       # conversion is performed and the current color is returned.
-      # 
+      #
       # @param target_space [Abachrome::ColorSpace] The target color space to convert to
       # @return [Abachrome::Color] A new color object in the target color space, or self
       # if the target space is the same as the current color space
@@ -37,7 +39,7 @@ module Abachrome
       # Converts the color object to the specified target color space in-place.
       # This method modifies the current object by changing its color space and
       # coordinates to match the target color space.
-      # 
+      #
       # @param target_space [Abachrome::ColorSpace] The color space to convert to
       # @return [Abachrome::Color] Returns self with modified color space and coordinates
       # @see #to_color_space The non-destructive version that returns a new color object
@@ -51,7 +53,7 @@ module Abachrome
       end
 
       # Convert this color to a different color space.
-      # 
+      #
       # @param space_name [String, Symbol] The name of the target color space to convert to.
       # @return [Abachrome::Color] A new Color object in the specified color space.
       # @example
@@ -64,7 +66,7 @@ module Abachrome
       end
 
       # Converts this color to the specified color space in place.
-      # 
+      #
       # @param space_name [String, Symbol] The name or identifier of the target color space to convert to.
       # @return [Abachrome::Color] Returns self with its values converted to the specified color space.
       # @raise [Abachrome::ColorSpaceNotFoundError] If the specified color space is not registered.
@@ -77,7 +79,7 @@ module Abachrome
       end
 
       # Convert a color to a specified color space.
-      # 
+      #
       # @param space_name [Symbol, String] The name of the color space to convert to.
       # @return [Abachrome::Color] A new Color instance in the specified color space.
       # @example
@@ -88,7 +90,7 @@ module Abachrome
       end
 
       # Converts the color to the specified color space and mutates the current object.
-      # 
+      #
       # @param space_name [Symbol, String] The target color space to convert to (e.g., :oklch, :rgb, :lab)
       # @return [Abachrome::Color] Returns self after conversion
       # @see #convert_to!

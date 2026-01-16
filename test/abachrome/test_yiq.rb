@@ -11,7 +11,7 @@ class TestYIQ < Minitest::Test
   def test_yiq_color_space_exists
     refute_nil @yiq_space
     assert_equal :yiq, @yiq_space.name
-    assert_equal [:y, :i, :q], @yiq_space.coordinates
+    assert_equal %i[y i q], @yiq_space.coordinates
   end
 
   def test_from_yiq
@@ -194,17 +194,17 @@ class TestYIQ < Minitest::Test
     # Test Rec. 601 luma with various color values
     # Purple: RGB(0.5, 0.0, 0.5)
     purple = Abachrome::Color.from_rgb(0.5, 0.0, 0.5)
-    expected_luma = 0.299 * 0.5 + 0.587 * 0.0 + 0.114 * 0.5
+    expected_luma = (0.299 * 0.5) + (0.587 * 0.0) + (0.114 * 0.5)
     assert_in_delta expected_luma, purple.luma_601.to_f, 0.001
 
     # Orange: RGB(1.0, 0.5, 0.0)
     orange = Abachrome::Color.from_rgb(1.0, 0.5, 0.0)
-    expected_luma = 0.299 * 1.0 + 0.587 * 0.5 + 0.114 * 0.0
+    expected_luma = (0.299 * 1.0) + (0.587 * 0.5) + (0.114 * 0.0)
     assert_in_delta expected_luma, orange.luma_601.to_f, 0.001
 
     # Cyan: RGB(0, 1, 1)
     cyan = Abachrome::Color.from_rgb(0, 1, 1)
-    expected_luma = 0.299 * 0.0 + 0.587 * 1.0 + 0.114 * 1.0
+    expected_luma = (0.299 * 0.0) + (0.587 * 1.0) + (0.114 * 1.0)
     assert_in_delta expected_luma, cyan.luma_601.to_f, 0.001
   end
 
@@ -217,7 +217,7 @@ class TestYIQ < Minitest::Test
 
     assert_in_delta 0.299, luma_601, 0.001
     assert_in_delta 0.2126, luma_709, 0.001
-    refute_in_delta luma_601, luma_709, 0.01  # Should be different
+    refute_in_delta luma_601, luma_709, 0.01 # Should be different
   end
 
   def test_grayscale_601_preserves_brightness

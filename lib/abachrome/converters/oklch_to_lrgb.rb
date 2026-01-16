@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::OklchToLrgb - OKLCH to Linear RGB color space converter
 #
 # This converter transforms colors from the OKLCH color space to the linear RGB (LRGB) color space.
@@ -54,9 +56,9 @@ module Abachrome
 
         # Step 4: LMS to LRGB
         # Using matrix M_lrgb_from_lms (OKLAB specific)
-        r_lrgb = (l_lms * AD("4.07674166134799"))   + (m_lms * AD("-3.307711590408193")) + (s_lms * AD("0.230969928729428"))
+        r_lrgb = (l_lms * AD("4.07674166134799")) + (m_lms * AD("-3.307711590408193")) + (s_lms * AD("0.230969928729428"))
         g_lrgb = (l_lms * AD("-1.2684380040921763")) + (m_lms * AD("2.6097574006633715")) + (s_lms * AD("-0.3413193963102197"))
-        b_lrgb = (l_lms * AD("-0.004196086541837188"))+ (m_lms * AD("-0.7034186144594493")) + (s_lms * AD("1.7076147009309444"))
+        b_lrgb = (l_lms * AD("-0.004196086541837188")) + (m_lms * AD("-0.7034186144594493")) + (s_lms * AD("1.7076147009309444"))
 
         # Clamp LRGB values to be non-negative.
         # LRGB values can be outside [0,1] but should be >= 0.

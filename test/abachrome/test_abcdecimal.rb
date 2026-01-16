@@ -215,7 +215,7 @@ class TestAbcDecimal < Minitest::Test
     assert_equal("85.0", (dec / 0.5).to_s)
 
     # String
-    assert_equal("52.5", (dec + "10").to_s)
+    assert_equal("52.5", "#{dec}10")
     assert_equal("32.5", (dec - "10").to_s)
     assert_equal("425.0", (dec * "10").to_s)
     assert_equal("4.25", (dec / "10").to_s)

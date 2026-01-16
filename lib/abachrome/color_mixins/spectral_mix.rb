@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorMixins::SpectralMix - Kubelka-Munk spectral color mixing
 #
 # This mixin adds spectral mixing capabilities to Color objects using the

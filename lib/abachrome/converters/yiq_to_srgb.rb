@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::YiqToSrgb - YIQ to sRGB color space converter
 #
 # This converter transforms colors from the YIQ color space back to the standard RGB
@@ -30,9 +32,9 @@ module Abachrome
         # R = Y + 0.956I + 0.619Q
         # G = Y - 0.272I - 0.647Q
         # B = Y - 1.106I + 1.703Q
-        r = y + AD("0.9563") * i + AD("0.6210") * q
-        g = y - AD("0.2721") * i - AD("0.6474") * q
-        b = y - AD("1.1070") * i + AD("1.7046") * q
+        r = y + (AD("0.9563") * i) + (AD("0.6210") * q)
+        g = y - (AD("0.2721") * i) - (AD("0.6474") * q)
+        b = y - (AD("1.1070") * i) + (AD("1.7046") * q)
 
         Color.new(
           ColorSpace.find(:srgb),

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converter - Color space conversion registry and orchestration system
 #
 # This module provides the central registry and conversion orchestration for transforming colors
@@ -22,18 +24,18 @@ module Abachrome
   class Converter
     class << self
       # Returns the registry hash used to store color space converters.
-      # 
+      #
       # This method lazily initializes and returns the hash used internally to store
       # converter mappings between different color spaces. This registry is a central
       # repository that maps color space pairs to their appropriate conversion functions.
-      # 
+      #
       # @return [Hash] The converter registry hash, mapping color space pairs to converter functions
       def registry
         @registry ||= {}
       end
 
       # Register a converter class for transforming colors between two specific color spaces.
-      # 
+      #
       # @param from_space [Symbol, String] The source color space identifier
       # @param to_space [Symbol, String] The destination color space identifier
       # @param converter_class [Class] The converter class that implements the transformation
@@ -43,7 +45,7 @@ module Abachrome
       end
 
       # Converts a color from its current color space to the specified target color space.
-      # 
+      #
       # @param color [Abachrome::Color] The color to convert
       # @param to_space_name [String, Symbol] The name of the target color space
       # @return [Abachrome::Color] The color converted to the target color space
@@ -65,13 +67,13 @@ module Abachrome
       # @example
       # converter = Abachrome::Converter.new
       # converter.register_all_converters
-      # 
+      #
       # Automatically registers all converter classes found in the Converters namespace.
       # The method iterates through constants in the Converters module, identifies classes
       # with naming pattern "FromSpaceToSpace" (e.g., LrgbToOklab), extracts the source
       # and destination color spaces from the class name, and registers the converter
       # class for the corresponding color space conversion.
-      # 
+      #
       # @return [void]
       def register_all_converters
         Converters.constants.each do |const_name|
@@ -92,7 +94,7 @@ module Abachrome
       private
 
       # Retrieves a converter function between two color spaces from the registry.
-      # 
+      #
       # @param from_space_name [String, Symbol] The source color space name
       # @param to_space_name [String, Symbol] The target color space name
       # @return [Proc, nil] The conversion function if registered, or nil if no converter exists for the specified color spaces

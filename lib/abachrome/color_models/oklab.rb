@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::Oklab - OKLAB color space model definition
 #
 # This module defines the OKLAB color model within the Abachrome color manipulation library.

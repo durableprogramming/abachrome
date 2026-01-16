@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::SrgbToCmyk - sRGB to CMYK color space converter
 #
 # This converter transforms colors from the standard RGB (sRGB) color space to the CMYK

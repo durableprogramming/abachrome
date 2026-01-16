@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::YIQ - YIQ color space model utilities
 #
 # This module provides utility methods for the YIQ color model within the Abachrome

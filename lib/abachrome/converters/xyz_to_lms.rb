@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 module Abachrome
   module Converters
     class XyzToLms < Abachrome::Converters::Base
       # Converts a color from XYZ color space to LMS color space.
-      # 
+      #
       # This method implements the XYZ to LMS transformation using the standard
       # transformation matrix. The LMS color space represents the response of
       # the three types of cone cells in the human eye (Long, Medium, Short),
       # while XYZ is the CIE 1931 color space that forms the basis for most
       # other color space definitions.
-      # 
+      #
       # @param xyz_color [Abachrome::Color] The color in XYZ color space
       # @raise [ArgumentError] If the input color is not in XYZ color space
       # @return [Abachrome::Color] The resulting color in LMS color space with

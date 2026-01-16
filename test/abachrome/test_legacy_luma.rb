@@ -40,7 +40,7 @@ class TestLegacyLuma < Minitest::Test
       Abachrome::Color.from_rgb(1, 1, 0),    # Yellow
       Abachrome::Color.from_rgb(1, 0, 1),    # Magenta
       Abachrome::Color.from_rgb(0, 1, 1),    # Cyan
-      Abachrome::Color.from_rgb(0.5, 0.3, 0.7)  # Purple
+      Abachrome::Color.from_rgb(0.5, 0.3, 0.7) # Purple
     ]
 
     test_colors.each do |color|
@@ -272,8 +272,12 @@ class TestLegacyLuma < Minitest::Test
   def test_luma_linearity
     # Verify that luma calculation is linear
     # luma(c1) + luma(c2) should equal luma(c1+c2) for additive RGB
-    r1, g1, b1 = 0.2, 0.3, 0.4
-    r2, g2, b2 = 0.3, 0.2, 0.1
+    r1 = 0.2
+    g1 = 0.3
+    b1 = 0.4
+    r2 = 0.3
+    g2 = 0.2
+    b2 = 0.1
 
     color1 = Abachrome::Color.from_rgb(r1, g1, b1)
     color2 = Abachrome::Color.from_rgb(r2, g2, b2)

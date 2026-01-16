@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::Base - Abstract base class for color space converters
 #
 # This class provides the foundation for implementing color space conversion functionality
@@ -22,7 +24,7 @@ module Abachrome
       attr_reader :from_space, :to_space
 
       # Initialize a new converter between two color spaces.
-      # 
+      #
       # @param from_space [Abachrome::ColorSpace] The source color space to convert from
       # @param to_space [Abachrome::ColorSpace] The target color space to convert to
       # @return [Abachrome::Converters::Base] A new converter instance
@@ -32,7 +34,7 @@ module Abachrome
       end
 
       # Converts a color from one color space to another.
-      # 
+      #
       # @abstract This is an abstract method that must be implemented by subclasses.
       # @param color [Abachrome::Color] The color to convert
       # @return [Abachrome::Color] The converted color
@@ -42,7 +44,7 @@ module Abachrome
       end
 
       # Validates that a color uses the expected color model.
-      # 
+      #
       # @param color [Abachrome::Color] The color object to check
       # @param model [Symbol, String] The expected color model
       # @raise [RuntimeError] If the color's model doesn't match the expected model
@@ -54,10 +56,10 @@ module Abachrome
       end
 
       # Determines if the converter can handle the given color.
-      # 
+      #
       # This method checks if the color's current color space matches
       # the converter's source color space.
-      # 
+      #
       # @param color [Abachrome::Color] The color to check
       # @return [Boolean] true if the converter can convert from the color's current color space,
       # false otherwise
@@ -66,7 +68,7 @@ module Abachrome
       end
 
       # Register a converter class for transforming colors between two specific color spaces.
-      # 
+      #
       # @param from_space_id [Symbol] The identifier of the source color space
       # @param to_space_id [Symbol] The identifier of the destination color space
       # @param converter_class [Class] The converter class that handles the transformation
@@ -77,7 +79,7 @@ module Abachrome
       end
 
       # Find a converter for converting between color spaces.
-      # 
+      #
       # @param from_space_id [Symbol, String] The identifier of the source color space
       # @param to_space_id [Symbol, String] The identifier of the destination color space
       # @return [Converter, nil] The converter instance for the specified color spaces, or nil if no converter is found
@@ -87,10 +89,10 @@ module Abachrome
       end
 
       # Converts a color from its current color space to a target color space.
-      # 
+      #
       # This method finds the appropriate converter class for the given source and
       # target color spaces and performs the conversion.
-      # 
+      #
       # @param color [Abachrome::Color] The color to convert
       # @param to_space [Abachrome::ColorSpace] The target color space to convert to
       # @return [Abachrome::Color] The converted color in the target color space
@@ -110,7 +112,7 @@ module Abachrome
 
       # Validates if a color can be converted from its current color space.
       # Raises an ArgumentError if the color's space doesn't match the expected source space.
-      # 
+      #
       # @param color [Abachrome::Color] The color object to validate
       # @raise [ArgumentError] If the color cannot be converted from its current color space
       # @return [nil] Returns nil if the color is valid for conversion

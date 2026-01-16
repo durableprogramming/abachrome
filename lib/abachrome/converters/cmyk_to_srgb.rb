@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::CmykToSrgb - CMYK to sRGB color space converter
 #
 # This converter transforms colors from the CMYK (Cyan, Magenta, Yellow, Key/Black)

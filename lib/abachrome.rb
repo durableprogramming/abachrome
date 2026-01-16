@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome - A Ruby color manipulation library
 #
 # This is the main entry point for the Abachrome library, providing color creation,
@@ -75,7 +77,7 @@ module Abachrome
   end
 
   # Creates a new color in the specified color space with given coordinates and alpha value.
-  # 
+  #
   # @param space_name [Symbol, String] The name of the color space (e.g., :srgb, :oklch)
   # @param coordinates [Array<Numeric>] The color coordinates in the specified color space
   # @param alpha [Float] The alpha (opacity) value of the color, defaults to 1.0 (fully opaque)
@@ -86,7 +88,7 @@ module Abachrome
   end
 
   # Creates a color object from RGB values.
-  # 
+  #
   # @param r [Numeric] The red component value (typically 0-255 or 0.0-1.0)
   # @param g [Numeric] The green component value (typically 0-255 or 0.0-1.0)
   # @param b [Numeric] The blue component value (typically 0-255 or 0.0-1.0)
@@ -97,7 +99,7 @@ module Abachrome
   end
 
   # Creates a color in the OKLAB color space.
-  # 
+  #
   # @param l [Numeric] The lightness component (L) in the OKLAB color space, typically in range 0 to 1
   # @param a [Numeric] The green-red component (a) in the OKLAB color space
   # @param b [Numeric] The blue-yellow component (b) in the OKLAB color space
@@ -108,7 +110,7 @@ module Abachrome
   end
 
   # Creates a new color from OKLCH color space values.
-  # 
+  #
   # @param l [Numeric] The lightness value, typically in range 0-1
   # @param a [Numeric] The chroma (colorfulness) value
   # @param b [Numeric] The hue angle value in degrees (0-360)
@@ -119,7 +121,7 @@ module Abachrome
   end
 
   # Creates a color object from a hexadecimal color code string.
-  # 
+  #
   # @param hex_str [String] The hexadecimal color code string to parse. Can be in formats like
   # "#RGB", "#RRGGBB", "RGB", or "RRGGBB", with or without the leading "#" character.
   # @return [Abachrome::Color] A new Color object representing the parsed hexadecimal color.
@@ -205,7 +207,7 @@ module Abachrome
   end
 
   # Convert a color from its current color space to another color space.
-  # 
+  #
   # @param color [Abachrome::Color] The color object to convert
   # @param to_space [Symbol, String] The destination color space identifier (e.g. :srgb, :oklch)
   # @return [Abachrome::Color] A new color object in the specified color space
@@ -214,7 +216,7 @@ module Abachrome
   end
 
   # Register a new color space with the Abachrome library.
-  # 
+  #
   # @param name [Symbol, String] The identifier for the color space being registered
   # @param block [Proc] A block that defines the color space properties and conversion rules
   # @return [Abachrome::ColorSpace] The newly registered color space object
@@ -223,11 +225,11 @@ module Abachrome
   end
 
   # Register a new color space converter in the Abachrome system.
-  # 
+  #
   # This method allows registering custom converters between color spaces.
   # Converters are used to transform color representations from one color
   # space to another.
-  # 
+  #
   # @param from_space [Symbol, String] The source color space identifier
   # @param to_space [Symbol, String] The destination color space identifier
   # @param converter [#call] An object responding to #call that performs the conversion

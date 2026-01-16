@@ -2,7 +2,6 @@
 
 require "minitest/autorun"
 
-
 module Minitest
   class Test
     def assert_coordinates_equal(expected, actual, delta = 0.001)

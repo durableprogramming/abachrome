@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::Lms - LMS color space model definition
 #
 # This module defines the LMS color model within the Abachrome color manipulation library.

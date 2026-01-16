@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::SrgbToYiq - sRGB to YIQ color space converter
 #
 # This converter transforms colors from the standard RGB (sRGB) color space to the YIQ
@@ -32,9 +34,9 @@ module Abachrome
         # Y = 0.299R + 0.587G + 0.114B  (Rec. 601 luma)
         # I = 0.596R - 0.275G - 0.321B  (In-phase: orange-blue)
         # Q = 0.212R - 0.523G + 0.311B  (Quadrature: purple-green)
-        y = AD("0.299") * r + AD("0.587") * g + AD("0.114") * b
-        i = AD("0.5959") * r - AD("0.2746") * g - AD("0.3213") * b
-        q = AD("0.2115") * r - AD("0.5227") * g + AD("0.3112") * b
+        y = (AD("0.299") * r) + (AD("0.587") * g) + (AD("0.114") * b)
+        i = (AD("0.5959") * r) - (AD("0.2746") * g) - (AD("0.3213") * b)
+        q = (AD("0.2115") * r) - (AD("0.5227") * g) + (AD("0.3112") * b)
 
         Color.new(
           ColorSpace.find(:yiq),

@@ -1,1 +1,3 @@
+# frozen_string_literal: true
+
 # Copyright (c) 2025 Durable Programming, LLC. All rights reserved.

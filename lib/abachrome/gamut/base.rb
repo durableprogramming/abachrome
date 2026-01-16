@@ -1,4 +1,4 @@
-#
+# frozen_string_literal: true
 
 module Abachrome
   module Gamut
@@ -28,7 +28,7 @@ module Abachrome
       # TODO: - make this work properly
       def contains?(coordinates)
         x, y, z = coordinates
-        x >= 0 && x <= 1 &&
+        x.between?(0, 1) &&
           y >= 0 && y <= 1 &&
           z >= 0 && z <= 1
       end

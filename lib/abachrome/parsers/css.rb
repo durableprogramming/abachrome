@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Abachrome::Parsers::CSS - CSS color format parser
 #
@@ -36,8 +38,6 @@ module Abachrome
         parse_functional_color(input)
       end
 
-      private
-
       def self.parse_named_color(input)
         # Check if input matches a named color
         rgb_values = Named::CSS.method(input.to_sym)&.call
@@ -53,27 +53,25 @@ module Abachrome
       def self.parse_functional_color(input)
         case input
         when /^rgb\((.+)\)$/
-          parse_rgb($1)
+          parse_rgb(::Regexp.last_match(1))
         when /^rgba\((.+)\)$/
-          parse_rgba($1)
+          parse_rgba(::Regexp.last_match(1))
         when /^hsl\((.+)\)$/
-          parse_hsl($1)
+          parse_hsl(::Regexp.last_match(1))
         when /^hsla\((.+)\)$/
-          parse_hsla($1)
+          parse_hsla(::Regexp.last_match(1))
         when /^hwb\((.+)\)$/
-          parse_hwb($1)
+          parse_hwb(::Regexp.last_match(1))
         when /^lab\((.+)\)$/
-          parse_lab($1)
+          parse_lab(::Regexp.last_match(1))
         when /^lch\((.+)\)$/
-          parse_lch($1)
+          parse_lch(::Regexp.last_match(1))
         when /^oklab\((.+)\)$/
-          parse_oklab($1)
+          parse_oklab(::Regexp.last_match(1))
         when /^oklch\((.+)\)$/
-          parse_oklch($1)
+          parse_oklch(::Regexp.last_match(1))
         when /^color\((.+)\)$/
-          parse_color_function($1)
-        else
-          nil
+          parse_color_function(::Regexp.last_match(1))
         end
       end
 
@@ -171,39 +169,43 @@ module Abachrome
         when "srgb"
           values = parse_color_values(values_str, 3)
           return nil unless values
+
           r, g, b = values
           Color.from_rgb(r, g, b)
         when "srgb-linear"
           values = parse_color_values(values_str, 3)
           return nil unless values
+
           r, g, b = values
           Color.from_lrgb(r, g, b)
         when "display-p3"
           # For now, approximate as sRGB
           values = parse_color_values(values_str, 3)
           return nil unless values
+
           r, g, b = values
           Color.from_rgb(r, g, b)
         when "a98-rgb"
           # For now, approximate as sRGB
           values = parse_color_values(values_str, 3)
           return nil unless values
+
           r, g, b = values
           Color.from_rgb(r, g, b)
         when "prophoto-rgb"
           # For now, approximate as sRGB
           values = parse_color_values(values_str, 3)
           return nil unless values
+
           r, g, b = values
           Color.from_rgb(r, g, b)
         when "rec2020"
           # For now, approximate as sRGB
           values = parse_color_values(values_str, 3)
           return nil unless values
+
           r, g, b = values
           Color.from_rgb(r, g, b)
-        else
-          nil
         end
       end
 
@@ -224,15 +226,16 @@ module Abachrome
 
         parsed = []
         values.each_with_index do |v, i|
-          if i == 0 # Hue
-            val = parse_angle_value(v)
-            return nil unless val
-            parsed << val
-          else # Saturation, Lightness, Alpha
-            val = parse_percentage_or_number(v)
-            return nil unless val
-            parsed << val
-          end
+          val = if i.zero? # Hue
+                  parse_angle_value(v)
+
+                else # Saturation, Lightness, Alpha
+                  parse_percentage_or_number(v)
+
+                end
+          return nil unless val
+
+          parsed << val
         end
         parsed
       end
@@ -306,66 +309,78 @@ module Abachrome
       def self.parse_numeric_value(str)
         return nil unless str
 
-        if str.end_with?('%')
-          (str.chomp('%').to_f / 100.0)
+        if str.end_with?("%")
+          (str.chomp("%").to_f / 100.0)
         else
           str.to_f
         end
-      rescue
+      rescue StandardError
         nil
       end
 
       def self.parse_percentage_or_number(str)
         return nil unless str
 
-        if str.end_with?('%')
-          str.chomp('%').to_f / 100.0
+        if str.end_with?("%")
+          str.chomp("%").to_f / 100.0
         else
           str.to_f
         end
-      rescue
+      rescue StandardError
         nil
       end
 
       def self.parse_angle_value(str)
         return nil unless str
 
-        if str.end_with?('deg')
-          str.chomp('deg').to_f
-        elsif str.end_with?('rad')
-          str.chomp('rad').to_f * 180.0 / Math::PI
-        elsif str.end_with?('grad')
-          str.chomp('grad').to_f * 0.9
-        elsif str.end_with?('turn')
-          str.chomp('turn').to_f * 360.0
+        if str.end_with?("deg")
+          str.chomp("deg").to_f
+        elsif str.end_with?("rad")
+          str.chomp("rad").to_f * 180.0 / Math::PI
+        elsif str.end_with?("grad")
+          str.chomp("grad").to_f * 0.9
+        elsif str.end_with?("turn")
+          str.chomp("turn").to_f * 360.0
         else
           str.to_f # Assume degrees
         end
-      rescue
+      rescue StandardError
         nil
       end
 
       # Color space conversion functions
 
       def self.hsl_to_rgb(h, s, l)
-        h = h / 360.0 # Normalize hue to 0-1
+        h /= 360.0 # Normalize hue to 0-1
 
-        c = (1 - (2 * l - 1).abs) * s
-        x = c * (1 - ((h * 6) % 2 - 1).abs)
-        m = l - c / 2
+        c = (1 - ((2 * l) - 1).abs) * s
+        x = c * (1 - (((h * 6) % 2) - 1).abs)
+        m = l - (c / 2)
 
-        if h < 1.0/6
-          r, g, b = c, x, 0
-        elsif h < 2.0/6
-          r, g, b = x, c, 0
-        elsif h < 3.0/6
-          r, g, b = 0, c, x
-        elsif h < 4.0/6
-          r, g, b = 0, x, c
-        elsif h < 5.0/6
-          r, g, b = x, 0, c
+        if h < 1.0 / 6
+          r = c
+          g = x
+          b = 0
+        elsif h < 2.0 / 6
+          r = x
+          g = c
+          b = 0
+        elsif h < 3.0 / 6
+          r = 0
+          g = c
+          b = x
+        elsif h < 4.0 / 6
+          r = 0
+          g = x
+          b = c
+        elsif h < 5.0 / 6
+          r = x
+          g = 0
+          b = c
         else
-          r, g, b = c, 0, x
+          r = c
+          g = 0
+          b = x
         end
 
         [r + m, g + m, b + m]
@@ -373,7 +388,7 @@ module Abachrome
 
       def self.hwb_to_rgb(h, w, b)
         # Normalize values
-        h = h / 360.0
+        h /= 360.0
 
         # Calculate RGB from HSL equivalent
         if w + b >= 1
@@ -384,9 +399,9 @@ module Abachrome
           r, g, b_rgb = rgb
 
           # Apply whiteness and blackness
-          r = r * (1 - w - b) + w
-          g = g * (1 - w - b) + w
-          b_rgb = b_rgb * (1 - w - b) + w
+          r = (r * (1 - w - b)) + w
+          g = (g * (1 - w - b)) + w
+          b_rgb = (b_rgb * (1 - w - b)) + w
 
           [r, g, b_rgb]
         end
@@ -395,12 +410,12 @@ module Abachrome
       def self.lab_to_xyz(l, a, b)
         # CIELAB to XYZ conversion (D65 white point)
         y = (l + 16) / 116
-        x = a / 500 + y
-        z = y - b / 200
+        x = (a / 500) + y
+        z = y - (b / 200)
 
-        x = x**3 > 0.008856 ? x**3 : (x - 16/116) / 7.787
-        y = y**3 > 0.008856 ? y**3 : (y - 16/116) / 7.787
-        z = z**3 > 0.008856 ? z**3 : (z - 16/116) / 7.787
+        x = x**3 > 0.008856 ? x**3 : (x - (16 / 116)) / 7.787
+        y = y**3 > 0.008856 ? y**3 : (y - (16 / 116)) / 7.787
+        z = z**3 > 0.008856 ? z**3 : (z - (16 / 116)) / 7.787
 
         # D65 white point
         x *= 0.95047
@@ -419,14 +434,14 @@ module Abachrome
 
       def self.xyz_to_rgb(x, y, z)
         # XYZ to linear RGB
-        r = x *  3.2406 + y * -1.5372 + z * -0.4986
-        g = x * -0.9689 + y *  1.8758 + z *  0.0415
-        b = x *  0.0557 + y * -0.2040 + z *  1.0570
+        r = (x * 3.2406) + (y * -1.5372) + (z * -0.4986)
+        g = (x * -0.9689) + (y * 1.8758) + (z *  0.0415)
+        b = (x * 0.0557) + (y * -0.2040) + (z *  1.0570)
 
         # Linear RGB to sRGB
         [r, g, b].map do |v|
           if v > 0.0031308
-            1.055 * (v ** (1/2.4)) - 0.055
+            (1.055 * (v**(1 / 2.4))) - 0.055
           else
             12.92 * v
           end

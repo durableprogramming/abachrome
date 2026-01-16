@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::CMYK - CMYK color space model utilities
 #
 # This module provides utility methods for the CMYK (Cyan, Magenta, Yellow, Key/Black)
@@ -22,6 +24,7 @@ module Abachrome
   module ColorModels
     class CMYK
       include Abachrome::ToAbcd
+
       class << self
         # Normalizes CMYK color component values to the [0,1] range.
         #
@@ -93,10 +96,10 @@ module Abachrome
           k = [c, m, y].min * gcr
 
           # Remove the gray component from CMY if k > 0
-          if k > 0
-            c = c - k
-            m = m - k
-            y = y - k
+          if k.positive?
+            c -= k
+            m -= k
+            y -= k
           end
 
           [c, m, y, k]

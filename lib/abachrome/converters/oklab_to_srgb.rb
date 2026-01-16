@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::OklabToSrgb - OKLAB to sRGB color space converter
 #
 # This converter transforms colors from the OKLAB color space to the standard RGB (sRGB) color space
@@ -24,7 +26,7 @@ module Abachrome
       # This conversion is performed in two steps:
       # 1. First converts from Oklab to linear RGB
       # 2. Then converts from linear RGB to sRGB
-      # 
+      #
       # @param oklab_color [Color] A color in the Oklab color space
       # @raise [ArgumentError] If the provided color is not in the Oklab color space
       # @return [Color] The converted color in the sRGB color space

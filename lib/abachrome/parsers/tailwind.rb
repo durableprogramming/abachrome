@@ -1,4 +1,4 @@
-#
+# frozen_string_literal: true
 
 module Abachrome
   module Parsers
@@ -7,7 +7,7 @@ module Abachrome
       # - gray-400
       # - blue-900/20 (with opacity)
       # - slate-50
-      TAILWIND_PATTERN = /^([a-z]+)-(\d+)(?:\/(\d+(?:\.\d+)?))?$/
+      TAILWIND_PATTERN = %r{^([a-z]+)-(\d+)(?:/(\d+(?:\.\d+)?))?$}
 
       def self.parse(input)
         match = input.match(TAILWIND_PATTERN)
@@ -29,12 +29,12 @@ module Abachrome
 
         # Calculate alpha from opacity percentage if provided
         alpha = if opacity
-          opacity_value = opacity.to_f
-          # Opacity in Tailwind is a percentage (0-100)
-          opacity_value / 100.0
-        else
-          1.0
-        end
+                  opacity_value = opacity.to_f
+                  # Opacity in Tailwind is a percentage (0-100)
+                  opacity_value / 100.0
+                else
+                  1.0
+                end
 
         Color.from_rgb(r, g, b, alpha)
       end

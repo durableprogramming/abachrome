@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::LrgbToOklab - Linear RGB to OKLAB color space converter
 #
 # This converter transforms colors from the linear RGB (LRGB) color space to the OKLAB color space
@@ -21,11 +23,11 @@ module Abachrome
   module Converters
     class LrgbToOklab < Abachrome::Converters::Base
       # Converts a color from linear RGB (LRGB) color space to OKLAB color space.
-      # 
+      #
       # This conversion applies a matrix transformation to the linear RGB values,
       # followed by a non-linear transformation, then another matrix transformation
       # to produce OKLAB coordinates.
-      # 
+      #
       # @param rgb_color [Abachrome::Color] A color in linear RGB (LRGB) color space
       # @raise [ArgumentError] If the provided color is not in LRGB color space
       # @return [Abachrome::Color] The converted color in OKLAB color space with the same alpha value as the input

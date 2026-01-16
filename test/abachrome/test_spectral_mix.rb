@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "test_helper"
 require "abachrome"
 
@@ -9,9 +11,9 @@ module Abachrome
 
       # Mix with equal weights using module function
       purple = Abachrome.spectral_mix([
-        { color: red, weight: 1 },
-        { color: blue, weight: 1 }
-      ])
+                                        { color: red, weight: 1 },
+                                        { color: blue, weight: 1 }
+                                      ])
 
       assert_instance_of Abachrome::Color, purple
       assert_equal :srgb, purple.color_space.name
@@ -85,10 +87,10 @@ module Abachrome
       blue = Abachrome.from_rgb(0, 0, 1)
 
       mixed = Abachrome.spectral_mix([
-        { color: red, weight: 1 },
-        { color: green, weight: 1 },
-        { color: blue, weight: 1 }
-      ])
+                                       { color: red, weight: 1 },
+                                       { color: green, weight: 1 },
+                                       { color: blue, weight: 1 }
+                                     ])
 
       assert_instance_of Abachrome::Color, mixed
       assert_equal :srgb, mixed.color_space.name
@@ -116,7 +118,7 @@ module Abachrome
       # Test lrgb_to_reflectance
       reflectance = Spectral.lrgb_to_reflectance(lrgb)
       assert_equal Spectral::SIZE, reflectance.size
-      assert reflectance.all? { |r| r >= 0 && r <= 1.1 },
+      assert reflectance.all? { |r| r.between?(0, 1.1) },
              "Reflectance values should be in valid range"
 
       # Test reflectance_to_xyz

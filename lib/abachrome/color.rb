@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Color - Core color representation class
 #
 # This is the central color class that represents colors across multiple color spaces
@@ -27,7 +29,7 @@ module Abachrome
     attr_reader :color_space, :coordinates, :alpha
 
     # Initializes a new Color object with the specified color space, coordinates, and alpha value.
-    # 
+    #
     # @param color_space [ColorSpace] The color space for this color instance
     # @param coordinates [Array<Numeric, String>] The color coordinates in the specified color space
     # @param alpha [Numeric, String] The alpha (opacity) value, between 0.0 and 1.0 (default: 1.0)
@@ -51,7 +53,7 @@ module Abachrome
     end
 
     # Creates a new Color instance from RGB values
-    # 
+    #
     # @param r [Numeric] The red component value (typically 0-1)
     # @param g [Numeric] The green component value (typically 0-1)
     # @param b [Numeric] The blue component value (typically 0-1)
@@ -63,7 +65,7 @@ module Abachrome
     end
 
     # Creates a new Color instance from LRGB values
-    # 
+    #
     # @param r [Numeric] The red component value (typically 0-1)
     # @param g [Numeric] The green component value (typically 0-1)
     # @param b [Numeric] The blue component value (typically 0-1)
@@ -75,7 +77,7 @@ module Abachrome
     end
 
     # Creates a new Color object with OKLAB values.
-    # 
+    #
     # @param l [Float] The lightness component (L) of the OKLAB color space
     # @param a [Float] The green-red component (a) of the OKLAB color space
     # @param b [Float] The blue-yellow component (b) of the OKLAB color space
@@ -124,10 +126,10 @@ module Abachrome
     end
 
     # Compares this color instance with another for equality.
-    # 
+    #
     # Two colors are considered equal if they have the same color space,
     # coordinates, and alpha value.
-    # 
+    #
     # @param other [Object] The object to compare with
     # @return [Boolean] true if the colors are equal, false otherwise
     def ==(other)
@@ -139,7 +141,7 @@ module Abachrome
     end
 
     # Checks if this color is equal to another color object.
-    # 
+    #
     # @param other [Object] The object to compare with
     # @return [Boolean] true if the two colors are equal, false otherwise
     # @see ==
@@ -151,7 +153,7 @@ module Abachrome
     # based on its color space, coordinates, and alpha value.
     # The method first converts these components to strings,
     # then computes a hash of the resulting array.
-    # 
+    #
     # @return [Integer] a hash code that can be used for equality comparison
     # and as a hash key in Hash objects
     def hash
