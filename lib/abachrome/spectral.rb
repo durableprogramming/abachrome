@@ -14,7 +14,6 @@
 # This produces more realistic color mixing than simple RGB interpolation,
 # avoiding issues like muddy browns when mixing complementary colors.
 
-require_relative "abc_decimal"
 
 module Abachrome
   module Spectral

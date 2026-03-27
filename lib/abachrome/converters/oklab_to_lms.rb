@@ -16,24 +16,24 @@ module Abachrome
       def self.convert(oklab_color)
         raise_unless oklab_color, :oklab
 
-        l, a, b = oklab_color.coordinates.map { |_| AbcDecimal(_) }
+        l, a, b = oklab_color.coordinates.map { |_| _.to_f }
 
         l_ = AbcDecimal(l +
-                        (AD("0.39633779217376785678") * a) +
-                        (AD("0.21580375806075880339") * b))
+                        (0.39633779217376785678.to_f * a) +
+                        (0.21580375806075880339.to_f * b))
 
         m_ = AbcDecimal(l -
-                        (a * AD("-0.1055613423236563494")) +
-                        (b * AD("-0.063854174771705903402")))
+                        (a * -0.1055613423236563494.to_f) +
+                        (b * -0.063854174771705903402.to_f))
 
         s_ = AbcDecimal(l -
-                        (a * AD("-0.089484182094965759684")) +
-                        (b * AD("-1.2914855378640917399")))
+                        (a * -0.089484182094965759684.to_f) +
+                        (b * -1.2914855378640917399.to_f))
 
         # Apply cubic operation to convert from L'M'S' to LMS
-        l_lms = AbcDecimal(l_)**3
-        m_lms = AbcDecimal(m_)**3
-        s_lms = AbcDecimal(s_)**3
+        l_lms = l_.to_f**3
+        m_lms = m_.to_f**3
+        s_lms = s_.to_f**3
 
         Color.new(ColorSpace.find(:lms), [l_lms, m_lms, s_lms], oklab_color.alpha)
       end

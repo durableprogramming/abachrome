@@ -26,7 +26,7 @@ module Abachrome
       # @return [Abachrome::Color] A new color object in the sRGB color space
       # with the same alpha value as the input color
       def self.convert(cmyk_color)
-        c, m, y, k = cmyk_color.coordinates.map { |component| AbcDecimal(component) }
+        c, m, y, k = cmyk_color.coordinates.map { |component| component.to_f }
 
         # Use the CMYK color model's conversion method
         r, g, b = ColorModels::CMYK.to_rgb(c, m, y, k)

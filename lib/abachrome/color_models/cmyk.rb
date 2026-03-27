@@ -18,7 +18,6 @@
 # (Black/Key) is added to achieve crisp text and deep shadows that cannot be produced
 # by combining cyan, magenta, and yellow inks alone.
 
-require_relative "../abc_decimal"
 
 module Abachrome
   module ColorModels
@@ -38,15 +37,15 @@ module Abachrome
             case value
             when String
               if value.end_with?("%")
-                AbcDecimal(value.chomp("%")) / AbcDecimal(100)
+                value.chomp("%".to_f) / 100.to_f
               else
-                AbcDecimal(value)
+                value.to_f
               end
             when Numeric
               if value > 1
-                AbcDecimal(value) / AbcDecimal(100)
+                value.to_f / 100.to_f
               else
-                AbcDecimal(value)
+                value.to_f
               end
             end
           end
@@ -60,15 +59,15 @@ module Abachrome
         # @param b [Numeric] Blue component (0-1)
         # @return [Array<AbcDecimal>] Array of [c, m, y, k] values
         def from_rgb_naive(r, g, b)
-          r = AbcDecimal(r)
-          g = AbcDecimal(g)
-          b = AbcDecimal(b)
+          r = r.to_f
+          g = g.to_f
+          b = b.to_f
 
           # Simple complementary conversion
-          c = AbcDecimal(1) - r
-          m = AbcDecimal(1) - g
-          y = AbcDecimal(1) - b
-          k = AbcDecimal(0)
+          c = 1.to_f - r
+          m = 1.to_f - g
+          y = 1.to_f - b
+          k = 0.to_f
 
           [c, m, y, k]
         end
@@ -82,15 +81,15 @@ module Abachrome
         # @param gcr_amount [Numeric] Gray Component Replacement amount (0-1), default 1.0 for full UCR
         # @return [Array<AbcDecimal>] Array of [c, m, y, k] values
         def from_rgb_ucr(r, g, b, gcr_amount = 1.0)
-          r = AbcDecimal(r)
-          g = AbcDecimal(g)
-          b = AbcDecimal(b)
-          gcr = AbcDecimal(gcr_amount)
+          r = r.to_f
+          g = g.to_f
+          b = b.to_f
+          gcr = gcr_amount.to_f
 
           # Calculate complementary CMY values
-          c = AbcDecimal(1) - r
-          m = AbcDecimal(1) - g
-          y = AbcDecimal(1) - b
+          c = 1.to_f - r
+          m = 1.to_f - g
+          y = 1.to_f - b
 
           # Find the minimum (gray component)
           k = [c, m, y].min * gcr
@@ -128,15 +127,15 @@ module Abachrome
         # @param k [Numeric] Key/Black component (0-1)
         # @return [Array<AbcDecimal>] Array of [r, g, b] values
         def to_rgb(c, m, y, k)
-          c = AbcDecimal(c)
-          m = AbcDecimal(m)
-          y = AbcDecimal(y)
-          k = AbcDecimal(k)
+          c = c.to_f
+          m = m.to_f
+          y = y.to_f
+          k = k.to_f
 
           # Standard CMYK to RGB conversion
-          r = (AbcDecimal(1) - c) * (AbcDecimal(1) - k)
-          g = (AbcDecimal(1) - m) * (AbcDecimal(1) - k)
-          b = (AbcDecimal(1) - y) * (AbcDecimal(1) - k)
+          r = (1.to_f - c) * (1.to_f - k)
+          g = (1.to_f - m) * (1.to_f - k)
+          b = (1.to_f - y) * (1.to_f - k)
 
           [r, g, b]
         end
@@ -151,7 +150,7 @@ module Abachrome
         # @param k [Numeric] Key/Black component (0-1)
         # @return [AbcDecimal] Total ink coverage as a decimal (0-4, often expressed as 0-400%)
         def total_area_coverage(c, m, y, k)
-          AbcDecimal(c) + AbcDecimal(m) + AbcDecimal(y) + AbcDecimal(k)
+          c.to_f + m.to_f + y.to_f + k.to_f
         end
       end
     end

@@ -6,8 +6,8 @@ module Abachrome
       def stretch_luminance(new_min: 0.0, new_max: 1.0)
         return self if empty?
 
-        new_min = AbcDecimal(new_min)
-        new_max = AbcDecimal(new_max)
+        new_min = new_min.to_f
+        new_max = new_max.to_f
 
         oklab_colors = @colors.map(&:to_oklab)
         current_min = oklab_colors.map { |c| c.coordinates[0] }.min
@@ -49,8 +49,8 @@ module Abachrome
       end
 
       def compress_luminance(amount = 0.5)
-        amount = AbcDecimal(amount)
-        mid_point = AbcDecimal("0.5")
+        amount = amount.to_f
+        mid_point = "0.5".to_f
         stretch_luminance(
           new_min: mid_point - (mid_point * amount),
           new_max: mid_point + (mid_point * amount)
@@ -58,8 +58,8 @@ module Abachrome
       end
 
       def compress_luminance!(amount = 0.5)
-        amount = AbcDecimal(amount)
-        mid_point = AbcDecimal("0.5")
+        amount = amount.to_f
+        mid_point = "0.5".to_f
         stretch_luminance!(
           new_min: mid_point - (mid_point * amount),
           new_max: mid_point + (mid_point * amount)

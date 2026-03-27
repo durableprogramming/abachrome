@@ -30,13 +30,13 @@ module Abachrome
       # value between 0 and 1. Defaults to 0.1 (10% increase).
       # @return [Abachrome::Color] A new Color instance with increased lightness.
       def lighten(amount = 0.1)
-        amount = AbcDecimal(amount)
+        amount = amount.to_f
         oklab = to_oklab
         l, a, b = oklab.coordinates
 
         new_l = l + amount
-        new_l = AbcDecimal("1.0") if new_l > 1
-        new_l = AbcDecimal("0.0") if new_l.negative?
+        new_l = "1.0".to_f if new_l > 1
+        new_l = "0.0".to_f if new_l.negative?
 
         Color.new(
           ColorSpace.find(:oklab),

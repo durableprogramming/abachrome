@@ -24,7 +24,7 @@ module Abachrome
       # @raise [TypeError] If the provided color is not in linear RGB color space
       def self.convert(lrgb_color)
         raise_unless lrgb_color, :lrgb
-        r, g, b = lrgb_color.coordinates.map { |c| to_srgb(AbcDecimal(c)) }
+        r, g, b = lrgb_color.coordinates.map { |c| to_srgb(c.to_f) }
 
         output_coords = [r, g, b]
 
@@ -46,10 +46,10 @@ module Abachrome
       def self.to_srgb(v)
         v_abs = v.abs
         v_sign = v.negative? ? -1 : 1
-        if v_abs <= AD("0.0031308")
-          v * AD("12.92")
+        if v_abs <= 0.0031308.to_f
+          v * 12.92.to_f
         else
-          v_sign * ((AD("1.055") * (v_abs**Rational(1.0, 2.4))) - AD("0.055"))
+          v_sign * ((1.055.to_f * (v_abs**Rational(1.0, 2.4))) - 0.055.to_f)
         end
       end
     end

@@ -26,15 +26,15 @@ module Abachrome
       # @return [Abachrome::Color] A new color object in the sRGB color space
       # with the same alpha value as the input color
       def self.convert(yiq_color)
-        y, i, q = yiq_color.coordinates.map { |c| AbcDecimal(c) }
+        y, i, q = yiq_color.coordinates.map { |c| c.to_f }
 
         # Inverse NTSC YIQ to RGB transformation matrix
         # R = Y + 0.956I + 0.619Q
         # G = Y - 0.272I - 0.647Q
         # B = Y - 1.106I + 1.703Q
-        r = y + (AD("0.9563") * i) + (AD("0.6210") * q)
-        g = y - (AD("0.2721") * i) - (AD("0.6474") * q)
-        b = y - (AD("1.1070") * i) + (AD("1.7046") * q)
+        r = y + (0.9563.to_f * i) + (0.6210.to_f * q)
+        g = y - (0.2721.to_f * i) - (0.6474.to_f * q)
+        b = y - (1.1070.to_f * i) + (1.7046.to_f * q)
 
         Color.new(
           ColorSpace.find(:srgb),

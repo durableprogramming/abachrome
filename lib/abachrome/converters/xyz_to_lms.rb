@@ -18,12 +18,12 @@ module Abachrome
       def self.convert(xyz_color)
         raise_unless xyz_color, :xyz
 
-        x, y, z = xyz_color.coordinates.map { |_| AbcDecimal(_) }
+        x, y, z = xyz_color.coordinates.map { |_| _.to_f }
 
         # XYZ to LMS transformation matrix
-        l = (x * AD("0.8189330101")) + (y * AD("0.3618667424")) - (z * AD("0.1288597137"))
-        m = (x * AD("0.0329845436")) + (y * AD("0.9293118715")) + (z * AD("0.0361456387"))
-        s = (x * AD("0.0482003018")) + (y * AD("0.2643662691")) + (z * AD("0.6338517070"))
+        l = (x * 0.8189330101.to_f) + (y * 0.3618667424.to_f) - (z * 0.1288597137.to_f)
+        m = (x * 0.0329845436.to_f) + (y * 0.9293118715.to_f) + (z * 0.0361456387.to_f)
+        s = (x * 0.0482003018.to_f) + (y * 0.2643662691.to_f) + (z * 0.6338517070.to_f)
 
         Color.new(ColorSpace.find(:lms), [l, m, s], xyz_color.alpha)
       end

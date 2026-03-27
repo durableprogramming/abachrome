@@ -24,7 +24,7 @@ module Abachrome
       # @return [Abachrome::Color] A new color object in the linear RGB (LRGB) color space
       # with the same alpha value as the input color
       def self.convert(srgb_color)
-        r, g, b = srgb_color.coordinates.map { |c| to_linear(AbcDecimal(c)) }
+        r, g, b = srgb_color.coordinates.map { |c| to_linear(c.to_f) }
 
         Color.new(
           ColorSpace.find(:lrgb),
@@ -42,10 +42,10 @@ module Abachrome
       def self.to_linear(v)
         v_abs = v.abs
         v_sign = v.negative? ? -1 : 1
-        if v_abs <= AD("0.04045")
-          v / AD("12.92")
+        if v_abs <= 0.04045.to_f
+          v / 12.92.to_f
         else
-          v_sign * (((v_abs + AD("0.055")) / AD("1.055"))**AD("2.4"))
+          v_sign * (((v_abs + 0.055.to_f) / 1.055.to_f)**2.4.to_f)
         end
       end
     end

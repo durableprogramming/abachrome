@@ -37,15 +37,15 @@ module Abachrome
             case value
             when String
               if value.end_with?("%")
-                AbcDecimal(value.chomp("%")) / AbcDecimal(100)
+                value.chomp("%".to_f) / 100.to_f
               else
-                AbcDecimal(value) / AbcDecimal(255)
+                value.to_f / 255.to_f
               end
             when Numeric
               if value > 1
-                AbcDecimal(value) / AbcDecimal(255)
+                value.to_f / 255.to_f
               else
-                AbcDecimal(value)
+                value.to_f
               end
             end
           end

@@ -21,7 +21,6 @@
 # calculations and transformations.
 
 require "dry-inflector"
-require_relative "abc_decimal"
 require_relative "color_space"
 
 module Abachrome
@@ -35,10 +34,10 @@ module Abachrome
     # @param alpha [Numeric, String] The alpha (opacity) value, between 0.0 and 1.0 (default: 1.0)
     # @raise [ArgumentError] If the coordinates are invalid for the specified color space
     # @return [Color] A new Color instance
-    def initialize(color_space, coordinates, alpha = AbcDecimal("1.0"))
+    def initialize(color_space, coordinates, alpha = "1.0".to_f)
       @color_space = color_space
-      @coordinates = coordinates.map { |c| AbcDecimal(c.to_s) }
-      @alpha = AbcDecimal.new(alpha.to_s)
+      @coordinates = coordinates.map { |c| c.to_s.to_f }
+      @alpha = alpha.to_s.to_f
 
       validate_coordinates!
     end
@@ -167,7 +166,7 @@ module Abachrome
     # (if not 1.0)
     def to_s
       coord_str = coordinates.map { |c| c.to_f.round(3) }.join(", ")
-      alpha_str = alpha == AbcDecimal.new("1.0") ? "" : ", #{alpha.to_f.round(3)}"
+      alpha_str = alpha == "1.0".to_f ? "" : ", #{alpha.to_f.round(3)}"
       "#{color_space.name}(#{coord_str}#{alpha_str})"
     end
 

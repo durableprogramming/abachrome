@@ -36,17 +36,17 @@ module Abachrome
       # @example Blend in a specific color space
       #   red.blend(blue, 0.5, target_color_space: :oklab)
       def blend(other, amount = 0.5, target_color_space: nil)
-        amount = AbcDecimal(amount)
+        amount = amount.to_f
 
         source = target_color_space ? to_color_space(target_color_space) : self
         other = other.to_color_space(source.color_space)
 
-        l1, a1, b1 = coordinates.map { |_| AbcDecimal(_) }
-        l2, a2, b2 = other.coordinates.map { |_| AbcDecimal(_) }
+        l1, a1, b1 = coordinates.map { |_| _.to_f }
+        l2, a2, b2 = other.coordinates.map { |_| _.to_f }
 
-        blended_l = (AbcDecimal(1 - amount) * l1)     + (AbcDecimal(amount) * l2)
-        blended_a = (AbcDecimal(1 - amount) * a1)     + (AbcDecimal(amount) * a2)
-        blended_b = (AbcDecimal(1 - amount) * b1)     + (AbcDecimal(amount) * b2)
+        blended_l = (1 - amount.to_f * l1)     + (amount.to_f * l2)
+        blended_a = (1 - amount.to_f * a1)     + (amount.to_f * a2)
+        blended_b = (1 - amount.to_f * b1)     + (amount.to_f * b2)
 
         blended_alpha = alpha + ((other.alpha - alpha) * amount)
 

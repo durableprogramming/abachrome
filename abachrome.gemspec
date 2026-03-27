@@ -3,13 +3,13 @@
 require_relative "lib/abachrome/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "abachrome"
+  spec.name = "abachrome-float"
   spec.version = Abachrome::VERSION
   spec.authors = ["Durable Programming"]
   spec.email = ["commercial@durableprogramming.com"]
 
-  spec.summary = "A Ruby gem for parsing, manipulating, and managing colors"
-  spec.description = "Abachrome provides a robust set of tools for working with various color formats including hex, RGB, HSL, and named colors. Features support for multiple color spaces (RGB, HSL, Lab, Oklab), color space conversion, gamut mapping, CSS color parsing and formatting, and high-precision color calculations using BigDecimal."
+  spec.summary = "A Ruby gem for parsing, manipulating, and managing colors using Float"
+  spec.description = "Abachrome provides a robust set of tools for working with various color formats including hex, RGB, HSL, and named colors. Features support for multiple color spaces (RGB, HSL, Lab, Oklab), color space conversion, gamut mapping, CSS color parsing and formatting, and high-precision color calculations using Float."
   spec.homepage = "https://github.com/durableprogramming/abachrome"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
 
   # Runtime dependencies
-  spec.add_dependency "bigdecimal", "~> 3.1"
   spec.add_dependency "dry-inflector", "~> 1.0"
 
 end

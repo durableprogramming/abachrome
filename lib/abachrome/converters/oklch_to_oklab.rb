@@ -33,11 +33,11 @@ module Abachrome
       def self.convert(oklch_color)
         raise_unless oklch_color, :oklch
 
-        l, c, h = oklch_color.coordinates.map { |_| AbcDecimal(_) }
+        l, c, h = oklch_color.coordinates.map { |_| _.to_f }
 
-        h_rad = (h * Math::PI) / AD(180)
-        a = c * AD(Math.cos(h_rad.value))
-        b = c * AD(Math.sin(h_rad.value))
+        h_rad = (h * Math::PI) / 180.to_f
+        a = c * Math.cos(h_rad.value.to_f)
+        b = c * Math.sin(h_rad.value.to_f)
 
         Color.new(
           ColorSpace.find(:oklab),

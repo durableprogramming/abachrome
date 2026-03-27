@@ -29,7 +29,7 @@ module Abachrome
       # @return [Abachrome::Color] A new color object in the CMYK color space
       # with the same alpha value as the input color
       def self.convert(srgb_color, gcr_amount: 1.0)
-        r, g, b = srgb_color.coordinates.map { |c| AbcDecimal(c) }
+        r, g, b = srgb_color.coordinates.map { |c| c.to_f }
 
         # Use GCR conversion from the CMYK color model
         c, m, y, k = ColorModels::CMYK.from_rgb_gcr(r, g, b, gcr_amount)
@@ -48,7 +48,7 @@ module Abachrome
       # @param srgb_color [Abachrome::Color] A color object in the sRGB color space
       # @return [Abachrome::Color] A new color object in the CMYK color space
       def self.convert_naive(srgb_color)
-        r, g, b = srgb_color.coordinates.map { |c| AbcDecimal(c) }
+        r, g, b = srgb_color.coordinates.map { |c| c.to_f }
 
         # Use naive conversion from the CMYK color model
         c, m, y, k = ColorModels::CMYK.from_rgb_naive(r, g, b)

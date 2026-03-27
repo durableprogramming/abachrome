@@ -31,9 +31,9 @@ module Abachrome
       # @param h [Numeric] The hue component in degrees, will be normalized to range 0-360
       # @return [Array<AbcDecimal>] Array containing the normalized [lightness, chroma, hue] values
       def self.normalize(l, c, h)
-        l = AbcDecimal(l)
-        c = AbcDecimal(c)
-        h = AbcDecimal(h)
+        l = l.to_f
+        c = c.to_f
+        h = h.to_f
 
         # Normalize hue to 0-360 range
         h -= 360 while h >= 360

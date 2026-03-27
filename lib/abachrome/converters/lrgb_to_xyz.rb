@@ -17,12 +17,12 @@ module Abachrome
       def self.convert(lrgb_color)
         raise_unless lrgb_color, :lrgb
 
-        r, g, b = lrgb_color.coordinates.map { |_| AbcDecimal(_) }
+        r, g, b = lrgb_color.coordinates.map { |_| _.to_f }
 
         # Linear RGB to XYZ transformation matrix (sRGB/D65)
-        x = (r * AD("0.4124564")) + (g * AD("0.3575761")) + (b * AD("0.1804375"))
-        y = (r * AD("0.2126729")) + (g * AD("0.7151522")) + (b * AD("0.0721750"))
-        z = (r * AD("0.0193339")) + (g * AD("0.1191920")) + (b * AD("0.9503041"))
+        x = (r * 0.4124564.to_f) + (g * 0.3575761.to_f) + (b * 0.1804375.to_f)
+        y = (r * 0.2126729.to_f) + (g * 0.7151522.to_f) + (b * 0.0721750.to_f)
+        z = (r * 0.0193339.to_f) + (g * 0.1191920.to_f) + (b * 0.9503041.to_f)
 
         Color.new(ColorSpace.find(:xyz), [x, y, z], lrgb_color.alpha)
       end

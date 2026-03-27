@@ -27,7 +27,7 @@ module Abachrome
         b = (b * 255).round
 
         # Format based on alpha value
-        return Kernel.format("rgba(%d, %d, %d, %.3f)", r, g, b, a) unless a == AbcDecimal.new("1.0")
+        return Kernel.format("rgba(%d, %d, %d, %.3f)", r, g, b, a) unless a == "1.0".to_f
         return Kernel.format("#%02x%02x%02x", r, g, b) unless r == g && g == b
 
         # Use shortened hex format for grayscale
@@ -54,7 +54,7 @@ module Abachrome
         g = (g * 255).round
         b = (b * 255).round
 
-        if a == AbcDecimal.new("1.0")
+        if a == "1.0".to_f
           Kernel.format("#%02x%02x%02x", r, g, b)
         else
           a = (a * 255).round
@@ -81,7 +81,7 @@ module Abachrome
         g = (g * 255).round
         b = (b * 255).round
 
-        if a == AbcDecimal.new("1.0")
+        if a == "1.0".to_f
           Kernel.format("rgb(%d, %d, %d)", r, g, b)
         else
           Kernel.format("rgba(%d, %d, %d, %.3f)", r, g, b, a)
@@ -106,7 +106,7 @@ module Abachrome
         # Format with appropriate precision
         format_string = "%.#{precision}f %.#{precision}f %.#{precision}f"
 
-        if alpha == AbcDecimal.new("1.0")
+        if alpha == "1.0".to_f
           Kernel.format("oklab(#{format_string})", l, a, b)
         else
           Kernel.format("oklab(#{format_string} / %.#{precision}f)", l, a, b, alpha)

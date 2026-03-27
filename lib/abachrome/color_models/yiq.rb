@@ -29,7 +29,7 @@ module Abachrome
         # @param q [Numeric] Quadrature component (purple-green), typically in range [-0.5226, 0.5226]
         # @return [Array<AbcDecimal>] Array of three normalized components as AbcDecimal objects
         def normalize(y, i, q)
-          [y, i, q].map { |value| AbcDecimal(value) }
+          [y, i, q].map { |value| value.to_f }
         end
       end
     end

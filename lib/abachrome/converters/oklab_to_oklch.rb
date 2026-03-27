@@ -37,7 +37,7 @@ module Abachrome
       def self.convert(oklab_color)
         raise_unless oklab_color, :oklab
 
-        l, a, b = oklab_color.coordinates.map { |_| AbcDecimal(_) }
+        l, a, b = oklab_color.coordinates.map { |_| _.to_f }
 
         c = ((a * a) + (b * b)).sqrt
         h = (AbcDecimal.atan2(b, a) * 180) / Math::PI
