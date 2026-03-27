@@ -320,6 +320,10 @@ module Abachrome
       @value.negative?
     end
 
+    def positive?
+      @value > 0
+    end
+
     # Calculates the arctangent of y/x using the signs of the arguments to determine the quadrant.
     # Unlike the standard Math.atan2, this method accepts AbcDecimal objects or any values
     # that can be converted to AbcDecimal.

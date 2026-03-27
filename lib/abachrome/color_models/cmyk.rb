@@ -38,7 +38,8 @@ module Abachrome
             case value
             when String
               if value.end_with?("%")
-                AbcDecimal(value.chomp("%")) / AbcDecimal(100)
+                value_without_percent = value.chomp("%")
+                AbcDecimal(value_without_percent) / AbcDecimal(100)
               else
                 AbcDecimal(value)
               end
