@@ -46,6 +46,6 @@ fi
 # Stage and commit
 git add .
 git status
-git commit -m "Sync with upstream abachrome $(git log -1 --format=%H upstream/main): replace BigDecimal with float" || echo "No changes to commit"
+git commit -m "Sync with upstream abachrome $(git log -1 --format=%H upstream/${REMOTE_BRANCH})" || echo "No changes to commit"
 
 # Make executable
