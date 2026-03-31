@@ -28,4 +28,12 @@ module Abachrome
   end
 end
 
+ColorSpace.register(
+  :xyz,
+  "XYZ",
+  %w[x y z],
+  nil,
+  []
+)
+
 # Copyright (c) 2025 Durable Programming, LLC. All rights reserved.

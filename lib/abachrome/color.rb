@@ -125,6 +125,30 @@ module Abachrome
       new(space, [c, m, y, k], alpha)
     end
 
+    # Creates a new Color instance from XYZ values
+    #
+    # @param x [Numeric] The X tristimulus value representing the CIE RGB red primary
+    # @param y [Numeric] The Y tristimulus value representing luminance
+    # @param z [Numeric] The Z tristimulus value representing the CIE RGB blue primary
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the XYZ color space
+    def self.from_xyz(x, y, z, alpha = 1.0)
+      space = ColorSpace.find(:xyz)
+      new(space, [x, y, z], alpha)
+    end
+
+    # Creates a new Color instance from LMS values
+    #
+    # @param l [Numeric] The long wavelength (L) cone response component
+    # @param m [Numeric] The medium wavelength (M) cone response component
+    # @param s [Numeric] The short wavelength (S) cone response component
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the LMS color space
+    def self.from_lms(l, m, s, alpha = 1.0)
+      space = ColorSpace.find(:lms)
+      new(space, [l, m, s], alpha)
+    end
+
     # Compares this color instance with another for equality.
     #
     # Two colors are considered equal if they have the same color space,
