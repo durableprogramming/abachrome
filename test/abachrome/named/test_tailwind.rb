@@ -66,7 +66,7 @@ class TestTailwind < Minitest::Test
     Abachrome::Named::Tailwind::COLORS.each do |color_name, shades|
       shades.each do |shade, rgb|
         rgb.each_with_index do |value, i|
-          assert value >= 0 && value <= 255,
+          assert value.between?(0, 255),
                  "#{color_name}-#{shade}[#{i}] = #{value} should be between 0 and 255"
         end
       end
@@ -86,9 +86,9 @@ class TestTailwind < Minitest::Test
              "#{color_name} should progress from light (50) to dark (950)"
 
       # Check that 50 is lighter than 500 and 500 is lighter than 950
-      shade_50 = shades['50'].sum / 3.0
-      shade_500 = shades['500'].sum / 3.0
-      shade_950 = shades['950'].sum / 3.0
+      shade_50 = shades["50"].sum / 3.0
+      shade_500 = shades["500"].sum / 3.0
+      shade_950 = shades["950"].sum / 3.0
 
       assert shade_50 > shade_500,
              "#{color_name}-50 should be lighter than #{color_name}-500"
@@ -99,21 +99,21 @@ class TestTailwind < Minitest::Test
 
   def test_specific_color_values
     # Test a few specific known values to ensure data accuracy
-    assert_equal [248, 250, 252], Abachrome::Named::Tailwind::COLORS['slate']['50']
-    assert_equal [100, 116, 139], Abachrome::Named::Tailwind::COLORS['slate']['500']
-    assert_equal [2, 6, 23], Abachrome::Named::Tailwind::COLORS['slate']['950']
+    assert_equal [248, 250, 252], Abachrome::Named::Tailwind::COLORS["slate"]["50"]
+    assert_equal [100, 116, 139], Abachrome::Named::Tailwind::COLORS["slate"]["500"]
+    assert_equal [2, 6, 23], Abachrome::Named::Tailwind::COLORS["slate"]["950"]
 
-    assert_equal [239, 246, 255], Abachrome::Named::Tailwind::COLORS['blue']['50']
-    assert_equal [59, 130, 246], Abachrome::Named::Tailwind::COLORS['blue']['500']
-    assert_equal [23, 37, 84], Abachrome::Named::Tailwind::COLORS['blue']['950']
+    assert_equal [239, 246, 255], Abachrome::Named::Tailwind::COLORS["blue"]["50"]
+    assert_equal [59, 130, 246], Abachrome::Named::Tailwind::COLORS["blue"]["500"]
+    assert_equal [23, 37, 84], Abachrome::Named::Tailwind::COLORS["blue"]["950"]
 
-    assert_equal [254, 242, 242], Abachrome::Named::Tailwind::COLORS['red']['50']
-    assert_equal [239, 68, 68], Abachrome::Named::Tailwind::COLORS['red']['500']
-    assert_equal [69, 10, 10], Abachrome::Named::Tailwind::COLORS['red']['950']
+    assert_equal [254, 242, 242], Abachrome::Named::Tailwind::COLORS["red"]["50"]
+    assert_equal [239, 68, 68], Abachrome::Named::Tailwind::COLORS["red"]["500"]
+    assert_equal [69, 10, 10], Abachrome::Named::Tailwind::COLORS["red"]["950"]
 
-    assert_equal [240, 253, 244], Abachrome::Named::Tailwind::COLORS['green']['50']
-    assert_equal [34, 197, 94], Abachrome::Named::Tailwind::COLORS['green']['500']
-    assert_equal [5, 46, 22], Abachrome::Named::Tailwind::COLORS['green']['950']
+    assert_equal [240, 253, 244], Abachrome::Named::Tailwind::COLORS["green"]["50"]
+    assert_equal [34, 197, 94], Abachrome::Named::Tailwind::COLORS["green"]["500"]
+    assert_equal [5, 46, 22], Abachrome::Named::Tailwind::COLORS["green"]["950"]
   end
 
   def test_gray_variants_exist
@@ -129,10 +129,10 @@ class TestTailwind < Minitest::Test
   def test_color_families_exist
     # Test that main color families are present
     color_families = {
-      'red_family' => %w[red orange amber yellow],
-      'green_family' => %w[lime green emerald teal],
-      'blue_family' => %w[cyan sky blue indigo],
-      'purple_family' => %w[violet purple fuchsia pink rose]
+      "red_family" => %w[red orange amber yellow],
+      "green_family" => %w[lime green emerald teal],
+      "blue_family" => %w[cyan sky blue indigo],
+      "purple_family" => %w[violet purple fuchsia pink rose]
     }
 
     color_families.each do |family_name, colors|
@@ -166,9 +166,9 @@ class TestTailwind < Minitest::Test
 
         # Calculate Euclidean distance in RGB space
         distance = Math.sqrt(
-          (rgb1[0] - rgb2[0])**2 +
-          (rgb1[1] - rgb2[1])**2 +
-          (rgb1[2] - rgb2[2])**2
+          ((rgb1[0] - rgb2[0])**2) +
+          ((rgb1[1] - rgb2[1])**2) +
+          ((rgb1[2] - rgb2[2])**2)
         )
 
         # Distance should be at least 5 (not too similar)
@@ -203,10 +203,10 @@ class TestTailwind < Minitest::Test
   def test_fifty_shade_is_lightest
     # Test that shade 50 is the lightest (highest RGB values on average)
     Abachrome::Named::Tailwind::COLORS.each do |color_name, shades|
-      shade_50_avg = shades['50'].sum / 3.0
+      shade_50_avg = shades["50"].sum / 3.0
 
       shades.each do |shade, rgb|
-        next if shade == '50'
+        next if shade == "50"
 
         avg = rgb.sum / 3.0
         assert shade_50_avg >= avg,
@@ -218,10 +218,10 @@ class TestTailwind < Minitest::Test
   def test_nine_fifty_shade_is_darkest
     # Test that shade 950 is the darkest (lowest RGB values on average)
     Abachrome::Named::Tailwind::COLORS.each do |color_name, shades|
-      shade_950_avg = shades['950'].sum / 3.0
+      shade_950_avg = shades["950"].sum / 3.0
 
       shades.each do |shade, rgb|
-        next if shade == '950'
+        next if shade == "950"
 
         avg = rgb.sum / 3.0
         assert shade_950_avg <= avg,

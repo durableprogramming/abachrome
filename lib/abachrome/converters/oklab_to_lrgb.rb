@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::OklabToLrgb - OKLAB to Linear RGB color space converter
 #
 # This converter transforms colors from the OKLAB color space to the linear RGB (LRGB) color space
@@ -39,9 +41,8 @@ module Abachrome
         # Step 1: OKLAB to L'M'S' (cone responses, non-linear)
         # These are the M_lms_prime_from_oklab matrix operations.
         l_prime = AbcDecimal(l_ok + (AD("0.39633779217376785678") * a_ok) + (AD("0.21580375806075880339") * b_ok))
-        m_prime = AbcDecimal(l_ok - (a_ok * AD("0.1055613423236563494")) - (b_ok * AD("0.063854174771705903402"))) # Note: original OklabToLms had + (b * AD("-0.063..."))
-        s_prime = AbcDecimal(l_ok - (a_ok * AD("0.089484182094965759684")) - (b_ok * AD("1.2914855378640917399"))) # Note: original OklabToLms had + (b * AD("-1.291..."))
-
+        m_prime = AbcDecimal(l_ok - (a_ok * AD("0.1055613423236563494")) - (b_ok * AD("0.063854174771705903402"))) # NOTE: original OklabToLms had + (b * AD("-0.063..."))
+        s_prime = AbcDecimal(l_ok - (a_ok * AD("0.089484182094965759684")) - (b_ok * AD("1.2914855378640917399"))) # NOTE: original OklabToLms had + (b * AD("-1.291..."))
 
         # Step 2: L'M'S' to LMS (cubing)
         l_lms = l_prime**3
@@ -50,9 +51,9 @@ module Abachrome
 
         # Step 3: LMS to LRGB
         # Using matrix M_lrgb_from_lms (OKLAB specific)
-        r_lrgb = (l_lms * AD("4.07674166134799"))   + (m_lms * AD("-3.307711590408193")) + (s_lms * AD("0.230969928729428"))
+        r_lrgb = (l_lms * AD("4.07674166134799")) + (m_lms * AD("-3.307711590408193")) + (s_lms * AD("0.230969928729428"))
         g_lrgb = (l_lms * AD("-1.2684380040921763")) + (m_lms * AD("2.6097574006633715")) + (s_lms * AD("-0.3413193963102197"))
-        b_lrgb = (l_lms * AD("-0.004196086541837188"))+ (m_lms * AD("-0.7034186144594493")) + (s_lms * AD("1.7076147009309444"))
+        b_lrgb = (l_lms * AD("-0.004196086541837188")) + (m_lms * AD("-0.7034186144594493")) + (s_lms * AD("1.7076147009309444"))
 
         # Clamp LRGB values to be non-negative (as done in LmsToLrgb.rb)
         # It's also common to clamp to [0, 1] range after conversion from a wider gamut space
@@ -60,7 +61,6 @@ module Abachrome
         # when converting to sRGB or other display spaces.
         # Here, we'll ensure non-negative as per LmsToLrgb.
         output_coords = [r_lrgb, g_lrgb, b_lrgb].map { |it| [it, AD(0)].max }
-
 
         Color.new(ColorSpace.find(:lrgb), output_coords, oklab_color.alpha)
       end

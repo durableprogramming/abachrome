@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Color - Core color representation class
 #
 # This is the central color class that represents colors across multiple color spaces
@@ -27,7 +29,7 @@ module Abachrome
     attr_reader :color_space, :coordinates, :alpha
 
     # Initializes a new Color object with the specified color space, coordinates, and alpha value.
-    # 
+    #
     # @param color_space [ColorSpace] The color space for this color instance
     # @param coordinates [Array<Numeric, String>] The color coordinates in the specified color space
     # @param alpha [Numeric, String] The alpha (opacity) value, between 0.0 and 1.0 (default: 1.0)
@@ -51,7 +53,7 @@ module Abachrome
     end
 
     # Creates a new Color instance from RGB values
-    # 
+    #
     # @param r [Numeric] The red component value (typically 0-1)
     # @param g [Numeric] The green component value (typically 0-1)
     # @param b [Numeric] The blue component value (typically 0-1)
@@ -63,7 +65,7 @@ module Abachrome
     end
 
     # Creates a new Color instance from LRGB values
-    # 
+    #
     # @param r [Numeric] The red component value (typically 0-1)
     # @param g [Numeric] The green component value (typically 0-1)
     # @param b [Numeric] The blue component value (typically 0-1)
@@ -123,7 +125,7 @@ module Abachrome
     end
 
     # Creates a new Color object with OKLAB values.
-    # 
+    #
     # @param l [Float] The lightness component (L) of the OKLAB color space
     # @param a [Float] The green-red component (a) of the OKLAB color space
     # @param b [Float] The blue-yellow component (b) of the OKLAB color space
@@ -135,7 +137,7 @@ module Abachrome
     end
 
     # Creates a new color instance in the OKLCH color space.
-    # 
+    #
     # @param l [Numeric] The lightness component (L), typically in range 0..1
     # @param c [Numeric] The chroma component (C), typically starting from 0 with no upper bound
     # @param h [Numeric] The hue component (H) in degrees, typically in range 0..360
@@ -146,11 +148,60 @@ module Abachrome
       new(space, [l, c, h], alpha)
     end
 
+    # Creates a new Color instance from YIQ values
+    #
+    # @param y [Numeric] The luma (brightness) component, typically in range 0 to 1
+    # @param i [Numeric] The in-phase component (orange-blue), typically in range -0.5957 to 0.5957
+    # @param q [Numeric] The quadrature component (purple-green), typically in range -0.5226 to 0.5226
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the YIQ color space
+    def self.from_yiq(y, i, q, alpha = 1.0)
+      space = ColorSpace.find(:yiq)
+      new(space, [y, i, q], alpha)
+    end
+
+    # Creates a new Color instance from CMYK values
+    #
+    # @param c [Numeric] The cyan component, typically in range 0 to 1
+    # @param m [Numeric] The magenta component, typically in range 0 to 1
+    # @param y [Numeric] The yellow component, typically in range 0 to 1
+    # @param k [Numeric] The key/black component, typically in range 0 to 1
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the CMYK color space
+    def self.from_cmyk(c, m, y, k, alpha = 1.0)
+      space = ColorSpace.find(:cmyk)
+      new(space, [c, m, y, k], alpha)
+    end
+
+    # Creates a new Color instance from XYZ values
+    #
+    # @param x [Numeric] The X tristimulus value representing the CIE RGB red primary
+    # @param y [Numeric] The Y tristimulus value representing luminance
+    # @param z [Numeric] The Z tristimulus value representing the CIE RGB blue primary
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the XYZ color space
+    def self.from_xyz(x, y, z, alpha = 1.0)
+      space = ColorSpace.find(:xyz)
+      new(space, [x, y, z], alpha)
+    end
+
+    # Creates a new Color instance from LMS values
+    #
+    # @param l [Numeric] The long wavelength (L) cone response component
+    # @param m [Numeric] The medium wavelength (M) cone response component
+    # @param s [Numeric] The short wavelength (S) cone response component
+    # @param alpha [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the LMS color space
+    def self.from_lms(l, m, s, alpha = 1.0)
+      space = ColorSpace.find(:lms)
+      new(space, [l, m, s], alpha)
+    end
+
     # Compares this color instance with another for equality.
-    # 
+    #
     # Two colors are considered equal if they have the same color space,
     # coordinates, and alpha value.
-    # 
+    #
     # @param other [Object] The object to compare with
     # @return [Boolean] true if the colors are equal, false otherwise
     def ==(other)
@@ -162,7 +213,7 @@ module Abachrome
     end
 
     # Checks if this color is equal to another color object.
-    # 
+    #
     # @param other [Object] The object to compare with
     # @return [Boolean] true if the two colors are equal, false otherwise
     # @see ==
@@ -174,7 +225,7 @@ module Abachrome
     # based on its color space, coordinates, and alpha value.
     # The method first converts these components to strings,
     # then computes a hash of the resulting array.
-    # 
+    #
     # @return [Integer] a hash code that can be used for equality comparison
     # and as a hash key in Hash objects
     def hash

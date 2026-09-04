@@ -7,3 +7,6 @@ group :development, :test do
   gem 'simplecov'
   gem 'rake'
 end
+gem "tty-progressbar", "~> 0.18.3"
+
+gem "rubocop", "~> 1.82"

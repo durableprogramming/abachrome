@@ -14,6 +14,10 @@ Abachrome is a Ruby gem for parsing, manipulating, and managing colors. It provi
 
 ![Abachrome Logo](logo.png)
 
+## Getting Help
+
+Questions about Abachrome? [Practical Ruby Gems](https://practicalrubygems.com/gems/abachrome/) is a good place to get them answered.
+
 ## Installation
 
 Add this line to your application's Gemfile:

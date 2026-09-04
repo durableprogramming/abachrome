@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::RGB - RGB color space model utilities
 #
 # This module provides utility methods for the RGB color model within the Abachrome
@@ -22,7 +24,7 @@ module Abachrome
     class RGB
       class << self
         # Normalizes RGB color component values to the [0,1] range.
-        # 
+        #
         # @param r [String, Numeric] Red component. If string with % suffix, interpreted as percentage;
         # if string without suffix or numeric > 1, interpreted as 0-255 range value;
         # if numeric ≤ 1, used directly.

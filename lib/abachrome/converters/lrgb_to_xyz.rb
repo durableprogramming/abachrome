@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Abachrome
   module Converters
     class LrgbToXyz < Abachrome::Converters::Base
       # Converts a color from linear RGB color space to XYZ color space.
-      # 
+      #
       # This method implements the linear RGB to XYZ transformation using the standard
       # transformation matrix for the sRGB color space with D65 white point. The XYZ
       # color space is the CIE 1931 color space that forms the basis for most other
       # color space definitions and serves as a device-independent reference.
-      # 
+      #
       # @param lrgb_color [Abachrome::Color] The color in linear RGB color space
       # @raise [ArgumentError] If the input color is not in linear RGB color space
       # @return [Abachrome::Color] The resulting color in XYZ color space with

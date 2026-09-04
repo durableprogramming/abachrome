@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Abachrome
   module Converters
     class LmsToLrgb < Abachrome::Converters::Base
       # Converts a color from LMS color space to linear RGB color space.
-      # 
+      #
       # This method implements the final part of the OKLAB to linear RGB transformation,
       # converting LMS (Long, Medium, Short) coordinates to linear RGB coordinates
       # using the standard transformation matrix. The LMS color space represents
       # the response of the three types of cone cells in the human eye.
-      # 
+      #
       # @param lms_color [Abachrome::Color] The color in LMS color space
       # @raise [ArgumentError] If the input color is not in LMS color space
       # @return [Abachrome::Color] The resulting color in linear RGB color space with

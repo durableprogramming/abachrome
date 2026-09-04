@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::PaletteMixins::Interpolate - Color palette interpolation functionality
 #
 # This mixin provides methods for interpolating between adjacent colors in a palette to create

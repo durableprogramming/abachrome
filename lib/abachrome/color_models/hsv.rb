@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorModels::HSV - HSV color space model definition
 #
 # This module defines the HSV (Hue, Saturation, Value) color model within the Abachrome
@@ -30,13 +32,13 @@ module Abachrome
 
       # Validates whether the coordinates are valid for the HSV color model.
       # Each component (hue, saturation, value) must be in the range [0, 1].
-      # 
+      #
       # @param coordinates [Array<Numeric>] An array of three values representing
       # hue (h), saturation (s), and value (v) in the range [0, 1]
       # @return [Boolean] true if all coordinates are within valid ranges, false otherwise
       def valid_coordinates?(coordinates)
         h, s, v = coordinates
-        h >= 0 && h <= 1.0 &&
+        h.between?(0, 1.0) &&
           s >= 0 && s <= 1.0 &&
           v >= 0 && v <= 1.0
       end

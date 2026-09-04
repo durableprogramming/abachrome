@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome - A Ruby color manipulation library
 #
 # This is the main entry point for the Abachrome library, providing color creation,
@@ -25,13 +27,16 @@ module Abachrome
   autoload :ColorSpace, "abachrome/color_space"
   autoload :Converter, "abachrome/converter"
   autoload :Gamut, "abachrome/gamut/base"
+  autoload :Spectral, "abachrome/spectral"
   autoload :ToAbcd, "abachrome/to_abcd"
   autoload :VERSION, "abachrome/version"
 
   module ColorModels
+    autoload :CMYK, "abachrome/color_models/cmyk"
     autoload :HSV, "abachrome/color_models/hsv"
     autoload :Oklab, "abachrome/color_models/oklab"
     autoload :RGB, "abachrome/color_models/rgb"
+    autoload :YIQ, "abachrome/color_models/yiq"
   end
 
   module ColorMixins
@@ -81,7 +86,7 @@ module Abachrome
   end
 
   # Creates a new color in the specified color space with given coordinates and alpha value.
-  # 
+  #
   # @param space_name [Symbol, String] The name of the color space (e.g., :srgb, :oklch)
   # @param coordinates [Array<Numeric>] The color coordinates in the specified color space
   # @param alpha [Float] The alpha (opacity) value of the color, defaults to 1.0 (fully opaque)
@@ -92,7 +97,7 @@ module Abachrome
   end
 
   # Creates a color object from RGB values.
-  # 
+  #
   # @param r [Numeric] The red component value (typically 0-255 or 0.0-1.0)
   # @param g [Numeric] The green component value (typically 0-255 or 0.0-1.0)
   # @param b [Numeric] The blue component value (typically 0-255 or 0.0-1.0)
@@ -103,7 +108,7 @@ module Abachrome
   end
 
   # Creates a color in the OKLAB color space.
-  # 
+  #
   # @param l [Numeric] The lightness component (L) in the OKLAB color space, typically in range 0 to 1
   # @param a [Numeric] The green-red component (a) in the OKLAB color space
   # @param b [Numeric] The blue-yellow component (b) in the OKLAB color space
@@ -114,7 +119,7 @@ module Abachrome
   end
 
   # Creates a new color from OKLCH color space values.
-  # 
+  #
   # @param l [Numeric] The lightness value, typically in range 0-1
   # @param a [Numeric] The chroma (colorfulness) value
   # @param b [Numeric] The hue angle value in degrees (0-360)
@@ -169,7 +174,7 @@ module Abachrome
   end
 
   # Creates a color object from a hexadecimal color code string.
-  # 
+  #
   # @param hex_str [String] The hexadecimal color code string to parse. Can be in formats like
   # "#RGB", "#RRGGBB", "RGB", or "RRGGBB", with or without the leading "#" character.
   # @return [Abachrome::Color] A new Color object representing the parsed hexadecimal color.
@@ -194,6 +199,57 @@ module Abachrome
     from_rgb(*rgb_values.map { |v| v / 255.0 })
   end
 
+  # Creates a color in the YIQ color space.
+  #
+  # @param y [Numeric] The luma (brightness) component, typically in range 0 to 1
+  # @param i [Numeric] The in-phase component (orange-blue), typically in range -0.5957 to 0.5957
+  # @param q [Numeric] The quadrature component (purple-green), typically in range -0.5226 to 0.5226
+  # @param alpha [Float] The alpha (opacity) value, ranging from 0.0 (transparent) to 1.0 (opaque), defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the YIQ color space
+  def from_yiq(y, i, q, alpha = 1.0)
+    Color.from_yiq(y, i, q, alpha)
+  end
+
+  # Creates a color in the CMYK color space.
+  #
+  # @param c [Numeric] The cyan component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param m [Numeric] The magenta component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param y [Numeric] The yellow component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param k [Numeric] The key/black component, typically in range 0 to 1 (or 0 to 100 for percentages)
+  # @param alpha [Float] The alpha (opacity) value, ranging from 0.0 (transparent) to 1.0 (opaque), defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the CMYK color space
+  def from_cmyk(c, m, y, k, alpha = 1.0)
+    Color.from_cmyk(c, m, y, k, alpha)
+  end
+
+  # Mix multiple colors using Kubelka-Munk spectral mixing.
+  #
+  # This function produces more realistic color mixing than simple RGB or LAB interpolation
+  # by simulating how real pigments absorb and scatter light. Based on spectral.js by
+  # Ronald van Wijnen (https://github.com/rvanwijnen/spectral.js)
+  #
+  # @param colors [Array<Hash>] Array of hashes with :color (Abachrome::Color) and :weight (Numeric)
+  # @param tinting_strengths [Hash] Optional hash mapping colors to tinting strengths (default: 1.0)
+  # @return [Abachrome::Color] The mixed color
+  #
+  # @example Mix red and blue with equal weights
+  #   red = Abachrome.from_rgb(1, 0, 0)
+  #   blue = Abachrome.from_rgb(0, 0, 1)
+  #   purple = Abachrome.spectral_mix([
+  #     {color: red, weight: 1},
+  #     {color: blue, weight: 1}
+  #   ])
+  #
+  # @example Mix three colors with different weights
+  #   mixed = Abachrome.spectral_mix([
+  #     {color: red, weight: 2},
+  #     {color: green, weight: 1},
+  #     {color: blue, weight: 1}
+  #   ])
+  def spectral_mix(colors, tinting_strengths: {})
+    Spectral.mix(colors, tinting_strengths: tinting_strengths)
+  end
+
   # Parses a CSS color string and returns a Color object.
   #
   # @param css_string [String] The CSS color string to parse (e.g., "#ff0000", "rgb(255, 0, 0)", "red")
@@ -203,7 +259,7 @@ module Abachrome
   end
 
   # Convert a color from its current color space to another color space.
-  # 
+  #
   # @param color [Abachrome::Color] The color object to convert
   # @param to_space [Symbol, String] The destination color space identifier (e.g. :srgb, :oklch)
   # @return [Abachrome::Color] A new color object in the specified color space
@@ -212,7 +268,7 @@ module Abachrome
   end
 
   # Register a new color space with the Abachrome library.
-  # 
+  #
   # @param name [Symbol, String] The identifier for the color space being registered
   # @param block [Proc] A block that defines the color space properties and conversion rules
   # @return [Abachrome::ColorSpace] The newly registered color space object
@@ -221,11 +277,11 @@ module Abachrome
   end
 
   # Register a new color space converter in the Abachrome system.
-  # 
+  #
   # This method allows registering custom converters between color spaces.
   # Converters are used to transform color representations from one color
   # space to another.
-  # 
+  #
   # @param from_space [Symbol, String] The source color space identifier
   # @param to_space [Symbol, String] The destination color space identifier
   # @param converter [#call] An object responding to #call that performs the conversion

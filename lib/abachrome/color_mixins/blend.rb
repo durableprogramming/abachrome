@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::ColorMixins::Blend - Color blending and mixing functionality
 #
 # This mixin provides methods for blending and mixing colors together in various color spaces.
@@ -58,7 +60,7 @@ module Abachrome
       # Blends this color with another color by the specified amount.
       # This is a destructive version of the blend method, modifying the current
       # color in place.
-      # 
+      #
       # @param other [Abachrome::Color] The color to blend with
       # @param amount [Float] The blend amount, between 0.0 and 1.0, where 0.0 is
       # this color and 1.0 is the other color (default: 0.5)
@@ -72,7 +74,7 @@ module Abachrome
       end
 
       # Alias for the blend method that mixes two colors together.
-      # 
+      #
       # @param other [Abachrome::Color] The color to mix with
       # @param amount [Float] The amount to mix, between 0.0 and 1.0, where 0.0 returns the original color and 1.0 returns the other color (default: 0.5)
       # @return [Abachrome::Color] A new color resulting from the mix of the two colors
@@ -81,10 +83,10 @@ module Abachrome
       end
 
       # Mix the current color with another color.
-      # 
+      #
       # This method is an alias for blend!. It combines the current color with
       # the provided color at the specified amount.
-      # 
+      #
       # @param other [Abachrome::Color] The color to mix with the current color
       # @param amount [Numeric] The amount of the other color to mix in, from 0 to 1 (default: 0.5)
       # @return [self] Returns the modified color object

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module Abachrome
   module Converters
     class XyzToOklab < Abachrome::Converters::Base
       # Converts a color from XYZ color space to OKLAB color space.
-      # 
+      #
       # This method implements the XYZ to OKLAB transformation by first
       # converting XYZ coordinates to the intermediate LMS (Long, Medium, Short)
       # color space, then applying the LMS to OKLAB transformation matrix.
-      # 
+      #
       # @param xyz_color [Abachrome::Color] The color in XYZ color space
       # @raise [ArgumentError] If the input color is not in XYZ color space
       # @return [Abachrome::Color] The resulting color in OKLAB color space with

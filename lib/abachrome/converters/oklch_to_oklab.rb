@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::OklchToOklab - OKLCH to OKLAB color space converter
 #
 # This converter transforms colors from the OKLCH color space to the OKLAB color space
@@ -24,7 +26,7 @@ module Abachrome
   module Converters
     class OklchToOklab < Abachrome::Converters::Base
       # Converts a color from OKLCH color space to OKLAB color space.
-      # 
+      #
       # @param oklch_color [Abachrome::Color] The color in OKLCH format to convert
       # @return [Abachrome::Color] The converted color in OKLAB format
       # @raise [StandardError] If the provided color is not in OKLCH color space
@@ -33,7 +35,7 @@ module Abachrome
 
         l, c, h = oklch_color.coordinates.map { |_| AbcDecimal(_) }
 
-        h_rad = (h * Math::PI)/ AD(180)
+        h_rad = (h * Math::PI) / AD(180)
         a = c * AD(Math.cos(h_rad.value))
         b = c * AD(Math.sin(h_rad.value))
 

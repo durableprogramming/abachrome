@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::XyzToLrgb - XYZ to linear RGB color space converter
 #
 # This converter transforms colors from the CIE 1931 XYZ color space to the linear RGB

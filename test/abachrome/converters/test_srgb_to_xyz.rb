@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
+require "abachrome"
 
 class TestSrgbToXyz < Minitest::Test
   def convert(r, g, b, alpha = 1.0)
@@ -13,8 +14,14 @@ class TestSrgbToXyz < Minitest::Test
     assert_equal :xyz, xyz.color_space.name
   end
 
+  def test_converts_primaries_to_xyz
+    assert_coordinates_equal [0.4124564, 0.2126729, 0.0193339], convert(1, 0, 0).coordinates
+    assert_coordinates_equal [0.3575761, 0.7151522, 0.1191920], convert(0, 1, 0).coordinates
+    assert_coordinates_equal [0.1804375, 0.0721750, 0.9503041], convert(0, 0, 1).coordinates
+  end
+
   def test_white_maps_to_d65_white_point
-    assert_coordinates_equal [0.95047, 1.0, 1.08883], convert(1, 1, 1).coordinates, 0.001
+    assert_coordinates_equal [0.95047, 1.0, 1.08883], convert(1, 1, 1).coordinates
   end
 
   def test_black
@@ -34,4 +41,13 @@ class TestSrgbToXyz < Minitest::Test
   def test_alpha_is_preserved
     assert_in_delta 0.35, convert(0.5, 0.5, 0.5, 0.35).alpha, 0.001
   end
+
+  def test_raises_error_for_non_srgb_input
+    lrgb = Abachrome::Color.from_lrgb(0.5, 0.5, 0.5)
+    assert_raises(RuntimeError) do
+      Abachrome::Converters::SrgbToXyz.convert(lrgb)
+    end
+  end
 end
+
+# Copyright (c) 2025 Durable Programming, LLC. All rights reserved.

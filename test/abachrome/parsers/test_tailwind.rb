@@ -61,7 +61,7 @@ class TestTailwindParser < Minitest::Test
       assert_instance_of Abachrome::Color, color,
                          "Failed to parse blue-#{shade}"
 
-      expected_rgb = Abachrome::Named::Tailwind::COLORS['blue'][shade]
+      expected_rgb = Abachrome::Named::Tailwind::COLORS["blue"][shade]
       expected = expected_rgb.map { |v| v / 255.0 }
 
       assert_coordinates_equal expected, color.coordinates.map(&:to_f), 0.001
@@ -81,7 +81,7 @@ class TestTailwindParser < Minitest::Test
       assert_instance_of Abachrome::Color, color,
                          "Failed to parse #{color_name}-500"
 
-      expected_rgb = Abachrome::Named::Tailwind::COLORS[color_name]['500']
+      expected_rgb = Abachrome::Named::Tailwind::COLORS[color_name]["500"]
       expected = expected_rgb.map { |v| v / 255.0 }
 
       assert_coordinates_equal expected, color.coordinates.map(&:to_f), 0.001
@@ -103,7 +103,7 @@ class TestTailwindParser < Minitest::Test
       "500",            # just a number
       "-500",           # just dash and number
       "blue-1000",      # invalid shade
-      "blue-5",         # invalid shade
+      "blue-5" # invalid shade
     ]
 
     invalid_inputs.each do |input|
@@ -283,7 +283,7 @@ class TestTailwindParser < Minitest::Test
       "blue-500-600",  # extra component
       "blue_500",      # wrong separator
       "blue",          # missing shade
-      "500",           # missing color
+      "500" # missing color
     ]
 
     invalid_inputs.each do |input|
@@ -294,7 +294,7 @@ class TestTailwindParser < Minitest::Test
   def test_parse_edge_case_opacities
     # Test edge cases for opacity parsing
     edge_cases = [
-      ["blue-500/0.5", 0.005],    # 0.5% opacity
+      ["blue-500/0.5", 0.005], # 0.5% opacity
       ["blue-500/1", 0.01],        # 1% opacity
       ["blue-500/99", 0.99],       # 99% opacity
       ["blue-500/99.9", 0.999]     # 99.9% opacity

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Abachrome::Converters::SrgbToXyz - sRGB to XYZ color space converter
 #
 # This converter transforms colors from the standard RGB (sRGB) color space to the CIE 1931
@@ -23,12 +25,16 @@ module Abachrome
     class SrgbToXyz < Abachrome::Converters::Base
       # Converts a color from sRGB color space to XYZ color space.
       #
-      # This is done by first converting from sRGB to linear RGB, then from linear RGB
-      # to XYZ.
+      # This is done by first converting from sRGB to linear RGB by removing gamma
+      # correction, then applying the linear RGB to XYZ transformation matrix.
       #
       # @param srgb_color [Abachrome::Color] Color in sRGB color space
-      # @return [Abachrome::Color] The converted color in XYZ color space
+      # @raise [RuntimeError] If the provided color is not in sRGB color space
+      # @return [Abachrome::Color] The converted color in XYZ color space with the
+      # same alpha as the input color
       def self.convert(srgb_color)
+        raise_unless srgb_color, :srgb
+
         LrgbToXyz.convert(SrgbToLrgb.convert(srgb_color))
       end
     end
