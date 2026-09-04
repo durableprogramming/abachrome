@@ -151,10 +151,22 @@ module Abachrome
     s.color_model = :hsl
   end
 
+  ColorSpace.register(:hwb) do |s|
+    s.coordinates = %i[hue whiteness blackness]
+    s.white_point = :D65
+    s.color_model = :hwb
+  end
+
   ColorSpace.register(:lab) do |s|
     s.coordinates = %i[lightness a b]
     s.white_point = :D65
     s.color_model = :lab
+  end
+
+  ColorSpace.register(:lch) do |s|
+    s.coordinates = %i[lightness chroma hue]
+    s.white_point = :D65
+    s.color_model = :lch
   end
 
   ColorSpace.register(:oklab) do |s|

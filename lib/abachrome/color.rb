@@ -74,6 +74,54 @@ module Abachrome
       new(space, [r, g, b], a)
     end
 
+    # Creates a new Color instance from HSL values
+    # 
+    # @param h [Numeric] The hue angle in degrees (typically 0-360)
+    # @param s [Numeric] The saturation component value (typically 0-1)
+    # @param l [Numeric] The lightness component value (typically 0-1)
+    # @param a [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the HSL color space
+    def self.from_hsl(h, s, l, a = 1.0)
+      space = ColorSpace.find(:hsl)
+      new(space, [h, s, l], a)
+    end
+
+    # Creates a new Color instance from HWB values
+    # 
+    # @param h [Numeric] The hue angle in degrees (typically 0-360)
+    # @param w [Numeric] The whiteness component value (typically 0-1)
+    # @param b [Numeric] The blackness component value (typically 0-1)
+    # @param a [Numeric] The alpha (opacity) component value (0-1), defaults to 1.0 (fully opaque)
+    # @return [Abachrome::Color] A new Color instance in the HWB color space
+    def self.from_hwb(h, w, b, a = 1.0)
+      space = ColorSpace.find(:hwb)
+      new(space, [h, w, b], a)
+    end
+
+    # Creates a new Color instance from CIELAB values
+    # 
+    # @param l [Numeric] The lightness component (L*), typically in range 0-100
+    # @param a [Numeric] The green-red component (a*) of the CIELAB color space
+    # @param b [Numeric] The blue-yellow component (b*) of the CIELAB color space
+    # @param alpha [Numeric] The alpha (opacity) value, from 0.0 to 1.0
+    # @return [Abachrome::Color] A new Color instance in the CIELAB color space
+    def self.from_lab(l, a, b, alpha = 1.0)
+      space = ColorSpace.find(:lab)
+      new(space, [l, a, b], alpha)
+    end
+
+    # Creates a new Color instance from CIELCH values
+    # 
+    # @param l [Numeric] The lightness component (L*), typically in range 0-100
+    # @param c [Numeric] The chroma component (C*), typically starting from 0 with no upper bound
+    # @param h [Numeric] The hue angle in degrees, typically in range 0-360
+    # @param alpha [Numeric] The alpha (opacity) value, from 0.0 to 1.0
+    # @return [Abachrome::Color] A new Color instance in the CIELCH color space
+    def self.from_lch(l, c, h, alpha = 1.0)
+      space = ColorSpace.find(:lch)
+      new(space, [l, c, h], alpha)
+    end
+
     # Creates a new Color object with OKLAB values.
     # 
     # @param l [Float] The lightness component (L) of the OKLAB color space

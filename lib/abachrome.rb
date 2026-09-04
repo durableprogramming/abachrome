@@ -41,8 +41,16 @@ module Abachrome
 
   module Converters
     autoload :Base, "abachrome/converters/base"
+    autoload :HslToSrgb, "abachrome/converters/hsl_to_srgb"
+    autoload :HwbToSrgb, "abachrome/converters/hwb_to_srgb"
+    autoload :LabToSrgb, "abachrome/converters/lab_to_srgb"
+    autoload :LabToXyz, "abachrome/converters/lab_to_xyz"
+    autoload :LchToLab, "abachrome/converters/lch_to_lab"
+    autoload :LchToSrgb, "abachrome/converters/lch_to_srgb"
     autoload :LrgbToOklab, "abachrome/converters/lrgb_to_oklab"
     autoload :OklabToLrgb, "abachrome/converters/oklab_to_lrgb"
+    autoload :SrgbToXyz, "abachrome/converters/srgb_to_xyz"
+    autoload :XyzToLrgb, "abachrome/converters/xyz_to_lrgb"
   end
 
   module Gamut
@@ -68,6 +76,7 @@ module Abachrome
   end
 
   module Parsers
+    autoload :CSS, "abachrome/parsers/css"
     autoload :Hex, "abachrome/parsers/hex"
   end
 
@@ -115,6 +124,50 @@ module Abachrome
     Color.from_oklch(l, a, b, alpha)
   end
 
+  # Creates a color in the HSL color space.
+  # 
+  # @param h [Numeric] The hue angle in degrees (0-360)
+  # @param s [Numeric] The saturation component, from 0.0 to 1.0
+  # @param l [Numeric] The lightness component, from 0.0 to 1.0
+  # @param alpha [Float] The alpha (opacity) value, from 0.0 to 1.0, defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the HSL color space
+  def from_hsl(h, s, l, alpha = 1.0)
+    Color.from_hsl(h, s, l, alpha)
+  end
+
+  # Creates a color in the HWB color space.
+  # 
+  # @param h [Numeric] The hue angle in degrees (0-360)
+  # @param w [Numeric] The whiteness component, from 0.0 to 1.0
+  # @param b [Numeric] The blackness component, from 0.0 to 1.0
+  # @param alpha [Float] The alpha (opacity) value, from 0.0 to 1.0, defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the HWB color space
+  def from_hwb(h, w, b, alpha = 1.0)
+    Color.from_hwb(h, w, b, alpha)
+  end
+
+  # Creates a color in the CIELAB color space.
+  # 
+  # @param l [Numeric] The lightness component (L*), typically in range 0-100
+  # @param a [Numeric] The green-red component (a*) of the CIELAB color space
+  # @param b [Numeric] The blue-yellow component (b*) of the CIELAB color space
+  # @param alpha [Float] The alpha (opacity) value, from 0.0 to 1.0, defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the CIELAB color space
+  def from_lab(l, a, b, alpha = 1.0)
+    Color.from_lab(l, a, b, alpha)
+  end
+
+  # Creates a color in the CIELCH color space.
+  # 
+  # @param l [Numeric] The lightness component (L*), typically in range 0-100
+  # @param c [Numeric] The chroma component (C*)
+  # @param h [Numeric] The hue angle in degrees (0-360)
+  # @param alpha [Float] The alpha (opacity) value, from 0.0 to 1.0, defaults to 1.0
+  # @return [Abachrome::Color] A new Color object in the CIELCH color space
+  def from_lch(l, c, h, alpha = 1.0)
+    Color.from_lch(l, c, h, alpha)
+  end
+
   # Creates a color object from a hexadecimal color code string.
   # 
   # @param hex_str [String] The hexadecimal color code string to parse. Can be in formats like
@@ -146,7 +199,6 @@ module Abachrome
   # @param css_string [String] The CSS color string to parse (e.g., "#ff0000", "rgb(255, 0, 0)", "red")
   # @return [Abachrome::Color, nil] A Color object if parsing succeeds, nil otherwise
   def parse(css_string)
-    require_relative "abachrome/parsers/css"
     Parsers::CSS.parse(css_string)
   end
 
