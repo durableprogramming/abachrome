@@ -39,15 +39,15 @@ module Abachrome
       end
 
       def self.parse_named_color(input)
-        # Check if input matches a named color
-        rgb_values = Named::CSS.method(input.to_sym)&.call
+        # CSS defines "transparent" as rgba(0, 0, 0, 0)
+        return Color.from_rgb(0, 0, 0, 0) if input == "transparent"
+
+        rgb_values = Named::CSS::ColorNames[input]
         return nil unless rgb_values
 
         # Convert 0-255 RGB values to 0-1 range
         r, g, b = rgb_values.map { |v| v / 255.0 }
         Color.from_rgb(r, g, b)
-      rescue NameError
-        nil
       end
 
       def self.parse_functional_color(input)

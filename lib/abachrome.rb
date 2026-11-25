@@ -135,15 +135,13 @@ module Abachrome
 
   # Creates a color object from a CSS color name.
   #
-  # @param color_name [String] The CSS color name (e.g., 'red', 'blue', 'cornflowerblue').
-  # Case-insensitive.
+  # @param color_name [String] The CSS color name (e.g., 'red', 'blue', 'cornflowerblue',
+  # 'transparent'). Case-insensitive.
   # @return [Abachrome::Color, nil] A color object in the RGB color space if the name is valid,
   # nil if the color name is not recognized.
   def from_name(color_name)
-    rgb_values = Named::CSS::ColorNames[color_name.downcase]
-    return nil unless rgb_values
-
-    from_rgb(*rgb_values.map { |v| v / 255.0 })
+    require_relative "abachrome/parsers/css"
+    Parsers::CSS.parse_named_color(color_name.strip.downcase)
   end
 
   # Creates a color in the YIQ color space.
