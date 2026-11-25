@@ -4,62 +4,42 @@ require_relative "../../test_helper"
 require "abachrome"
 
 class TestSrgbToXyz < Minitest::Test
-  def test_converts_red_to_xyz
-    red = Abachrome::Color.from_rgb(1, 0, 0)
-    xyz = Abachrome::Converters::SrgbToXyz.convert(red)
-
-    assert_equal :xyz, xyz.color_space.name
-    assert_in_delta 0.4124564, xyz.coordinates[0].to_f, 0.001
-    assert_in_delta 0.2126729, xyz.coordinates[1].to_f, 0.001
-    assert_in_delta 0.0193339, xyz.coordinates[2].to_f, 0.001
+  def convert(r, g, b, alpha = 1.0)
+    Abachrome::Converters::SrgbToXyz.convert(Abachrome::Color.from_rgb(r, g, b, alpha))
   end
 
-  def test_converts_green_to_xyz
-    green = Abachrome::Color.from_rgb(0, 1, 0)
-    xyz = Abachrome::Converters::SrgbToXyz.convert(green)
-
+  def test_returns_xyz_color
+    xyz = convert(0.5, 0.5, 0.5)
+    assert_kind_of Abachrome::Color, xyz
     assert_equal :xyz, xyz.color_space.name
-    assert_in_delta 0.3575761, xyz.coordinates[0].to_f, 0.001
-    assert_in_delta 0.7151522, xyz.coordinates[1].to_f, 0.001
-    assert_in_delta 0.1191920, xyz.coordinates[2].to_f, 0.001
   end
 
-  def test_converts_blue_to_xyz
-    blue = Abachrome::Color.from_rgb(0, 0, 1)
-    xyz = Abachrome::Converters::SrgbToXyz.convert(blue)
-
-    assert_equal :xyz, xyz.color_space.name
-    assert_in_delta 0.1804375, xyz.coordinates[0].to_f, 0.001
-    assert_in_delta 0.0721750, xyz.coordinates[1].to_f, 0.001
-    assert_in_delta 0.9503041, xyz.coordinates[2].to_f, 0.001
+  def test_converts_primaries_to_xyz
+    assert_coordinates_equal [0.4124564, 0.2126729, 0.0193339], convert(1, 0, 0).coordinates
+    assert_coordinates_equal [0.3575761, 0.7151522, 0.1191920], convert(0, 1, 0).coordinates
+    assert_coordinates_equal [0.1804375, 0.0721750, 0.9503041], convert(0, 0, 1).coordinates
   end
 
-  def test_converts_white_to_xyz
-    white = Abachrome::Color.from_rgb(1, 1, 1)
-    xyz = Abachrome::Converters::SrgbToXyz.convert(white)
-
-    assert_equal :xyz, xyz.color_space.name
-    # D65 white point
-    assert_in_delta 0.9504700, xyz.coordinates[0].to_f, 0.001
-    assert_in_delta 1.0000000, xyz.coordinates[1].to_f, 0.001
-    assert_in_delta 1.0888356, xyz.coordinates[2].to_f, 0.001
+  def test_white_maps_to_d65_white_point
+    assert_coordinates_equal [0.95047, 1.0, 1.08883], convert(1, 1, 1).coordinates
   end
 
-  def test_converts_black_to_xyz
-    black = Abachrome::Color.from_rgb(0, 0, 0)
-    xyz = Abachrome::Converters::SrgbToXyz.convert(black)
-
-    assert_equal :xyz, xyz.color_space.name
-    assert_in_delta 0.0, xyz.coordinates[0].to_f, 0.001
-    assert_in_delta 0.0, xyz.coordinates[1].to_f, 0.001
-    assert_in_delta 0.0, xyz.coordinates[2].to_f, 0.001
+  def test_black
+    assert_coordinates_equal [0, 0, 0], convert(0, 0, 0).coordinates
   end
 
-  def test_preserves_alpha
-    color = Abachrome::Color.from_rgb(0.5, 0.5, 0.5, 0.75)
-    xyz = Abachrome::Converters::SrgbToXyz.convert(color)
+  def test_roundtrips_back_through_lrgb
+    [[0.2, 0.6, 0.9], [1, 1, 1], [0, 0, 0], [0.5, 0.1, 0.7]].each do |coords|
+      xyz = convert(*coords)
+      lrgb = Abachrome::Converters::XyzToLrgb.convert(xyz)
+      assert_coordinates_equal coords,
+                              Abachrome::Converters::LrgbToSrgb.convert(lrgb).coordinates,
+                              0.00001
+    end
+  end
 
-    assert_equal BigDecimal("0.75"), xyz.alpha
+  def test_alpha_is_preserved
+    assert_in_delta 0.35, convert(0.5, 0.5, 0.5, 0.35).alpha, 0.001
   end
 
   def test_raises_error_for_non_srgb_input
